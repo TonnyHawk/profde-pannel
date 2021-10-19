@@ -1,0 +1,11 @@
+@import 'basic/mixins';
+@import 'basic/reset';
+@import 'basic/colors';
+
+@import '../fonts/roboto/stylesheet.css';
+@import '../fonts/gilroy/stylesheet.css';
+
+@import '../../node_modules/bootstrap/scss/bootstrap-utilities.scss';
+
+@import 'module/gall/gall';
+@import 'module/page/page';

@@ -6,6 +6,7 @@
    overflow-y: auto;
    overflow-x: hidden;
    padding: 5.5rem 2rem 8rem;
+   font-size: 62.5%;
 
    @include media-breakpoint-up(md) {
       padding: 5.5rem 5.5rem 11.5rem;
