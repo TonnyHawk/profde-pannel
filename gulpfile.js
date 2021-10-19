@@ -1,6 +1,5 @@
-const { watch } = require('fs');
-let sass = require('gulp-sass'),
-{dest, src, series, watch} = require('gulp'),
+let sass = require('gulp-sass')(require('sass'));
+let {dest, src, series, watch} = require('gulp'),
 gulp = require('gulp'),
 sourcemaps = require('gulp-sourcemaps');
 
@@ -9,7 +8,6 @@ function css(){
    return src('src/styles/main.scss')
    .pipe(sourcemaps.init())
    .pipe(sass())
-   .pipe()
    .pipe(sourcemaps.write())
    .pipe(dest('dist/css/'));
 }
