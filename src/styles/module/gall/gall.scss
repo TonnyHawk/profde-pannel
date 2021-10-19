@@ -1,6 +1,4 @@
 .gall {
-   font-size: 62.5%;
-
    // .gal__item
 
    &__item{cursor: pointer;}
@@ -38,12 +36,12 @@
 
    &__filters {
       display: flex;
-      gap: 1.5em;
-      margin-bottom: 3.5em;
+      gap: 15px;
+      margin-bottom: 35px;
 
       @include media-breakpoint-up(md) {
-         gap: 3em;
-         margin-bottom: 5em;
+         gap: 30px;
+         margin-bottom: 50px;
       }
    }
 
@@ -53,20 +51,21 @@
       font-family: Roboto;
       font-style: normal;
       font-weight: normal;
-      font-size: 1.8em;
-      line-height: 2.1em;
-      padding: 1em;
-      border-radius: 0.9em;
+      font-size: 18px;
+      line-height: 21px;
+      padding: 10px;
+      border-radius: 9px;
       cursor: pointer;
+      height: max-content;
 
       @include media-breakpoint-up(md) {
-         font-size: 2.2em;
-         line-height: 2.6em;
+         font-size: 22px;
+         line-height: 26px;
       }
 
       @include media-breakpoint-up(lg) {
-         font-size: 2.4em;
-         line-height: 2.8em;
+         font-size: 24px;
+         line-height: 28px;
       }
 
       &.is-active {
@@ -95,10 +94,10 @@
 
          // .gall__bd
 
-         $gap: 2.2em;
+         $gap: 22px;
 
          @include media-breakpoint-up(md) {
-            $gap: 3.2em;
+            $gap: 32px;
          }
 
          &__bd {
@@ -128,20 +127,20 @@
       }
 
       .gall-item {
-         padding: 1.5em;
+         padding: 15px;
          background-color: #E1E1E1;
-         border-radius: 1em;
+         border-radius: 10px;
          width: 100%;
          cursor: pointer;
          transition: background 0.4s;
          height: max-content;
 
          @include media-breakpoint-up(md) {
-            padding: 2.5em;
+            padding: 25px;
          }
 
          @include media-breakpoint-up(lg) {
-            max-width: 29em;
+            max-width: 290px;
          }
 
          // .gall-item__photo
@@ -167,15 +166,15 @@
             font-family: Gilroy;
             font-style: normal;
             font-weight: 600;
-            font-size: 1.6em;
+            font-size: 16px;
             line-height: 138.5%;
-            margin-top: 2.7em;
-            margin-bottom: 1.7em;
+            margin-top: 27px;
+            margin-bottom: 17px;
 
             @include media-breakpoint-up(md) {
-               font-size: 1.8em;
+               font-size: 18px;
                line-height: 138.5%;
-               margin-top: 2.7em;
+               margin-top: 27px;
             }
 
          }
@@ -186,11 +185,11 @@
             font-family: Roboto;
             font-style: normal;
             font-weight: 300;
-            font-size: 1.3em;
+            font-size: 13px;
             line-height: 138.5%;
 
             @include media-breakpoint-up(md) {
-               font-size: 1.4em;
+               font-size: 14px;
                line-height: 138.5%;
             }
          }
@@ -214,14 +213,14 @@
 
          // .gall__bd
 
-         $gap: 2em;
+         $gap: 20px;
 
          @include media-breakpoint-up(md) {
-            $gap: 3.5em;
+            $gap: 35px;
          }
 
          @include media-breakpoint-up(lg) {
-            $gap: 5em;
+            $gap: 50px;
          }
 
          &__bd {
@@ -249,7 +248,7 @@
 
          &__img {
             // height: 15em;
-            border-radius: 0.5em;
+            border-radius: 5px;
             // object-fit: cover;
             max-width: 100%;
             // max-height: 100%;
@@ -269,20 +268,20 @@
             font-family: Gilroy;
             font-style: normal;
             font-weight: 600;
-            font-size: 1.6em;
+            font-size: 16px;
             line-height: 138.5%;
-            margin: 1.5em 0 0.7em;
+            margin: 15px 0 7px;
 
             @include media-breakpoint-up(md) {
-               font-size: 2em;
-               line-height: 2.4em;
-               margin: 1.7em 0 0.7em;
+               font-size: 20px;
+               line-height: 24px;
+               margin: 17px 0 7px;
             }
 
             @include media-breakpoint-up(lg) {
-               font-size: 2.1em;
-               line-height: 2.9em;
-               margin: 2em 0 0.7em;
+               font-size: 21px;
+               line-height: 29px;
+               margin: 20px 0 7px;
             }
          }
 
@@ -292,17 +291,17 @@
             font-family: Roboto;
             font-style: normal;
             font-weight: 300;
-            font-size: 1.3em;
+            font-size: 13px;
             line-height: 138.5%;
 
             @include media-breakpoint-up(md) {
-               font-size: 1.5em;
-               line-height: 1.8em;
+               font-size: 15px;
+               line-height: 18px;
             }
 
             @include media-breakpoint-up(lg) {
-               font-size: 1.5em;
-               line-height: 2.1em;
+               font-size: 15px;
+               line-height: 21px;
             }
          }
       }

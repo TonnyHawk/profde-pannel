@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
    mode: 'development',
    entry: {
-      app: ['babel-polyfill', './src/js/index.js']
+      app: ['@babel/polyfill', './src/js/index.js']
    },
    output: {
       // options related to how webpack emits results
@@ -40,7 +40,9 @@ module.exports = {
       ]
     },
     devServer: {
-      publicPath: path.join(__dirname, 'dist')
+      static: {
+         directory: path.join(__dirname, 'dist'),
+       },
     },
 
 }
