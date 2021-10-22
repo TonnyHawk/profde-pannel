@@ -14,6 +14,7 @@ class Expanded extends Component {
          professor: human.professor || ['Deutsch'],
          id: human._id,
          role: human.role || 'student',
+         certificates: human.certificates || [],
          required: ['name', 'about']
       }
       this.form = React.createRef()
@@ -46,6 +47,17 @@ class Expanded extends Component {
       }
    }
 
+   addCertificate(){
+      this.setState(state=>{
+         state.certificates.push({
+            name: '',
+            photo: '',
+         })
+
+         return state
+      })
+   }
+
    addLangLevel(){
       this.setState(state=>{
          if(state.languages.length < 2){
@@ -70,8 +82,10 @@ class Expanded extends Component {
    deleteField(e){
       let key = e.target.getAttribute('data-name');
       let index = e.target.getAttribute('data-index')
+      let minNumOfElements = 1
+      if(key === 'certificates') minNumOfElements = 0
       this.setState(state=>{
-         if(state[key].length > 1){
+         if(state[key].length > minNumOfElements){
             state[key] = state[key].filter(elem=>{
                if(elem !== state[key][index]){
                   return elem
@@ -158,6 +172,19 @@ class Expanded extends Component {
             let video = formInfo.get('video')
             reqData.set('video', video, 'video.mp4')
          }
+
+         let certificates = this.state.certificates;
+         certificates = certificates.map((elem, index)=>{
+            // в якийх є файли з тих залить
+            let photo = formInfo.get('cert-photo-'+index)
+            if(photo.size > 0){
+               elem.photo = photo;
+               reqData.set('cert-photo-'+index, photo, 'cert-'+index+'.jpg')
+            }
+            return elem
+         })
+         human.certificates = certificates
+
          // alert('data is ready to deploy')
          console.log(human);
          reqData.set('info', JSON.stringify(human))
@@ -254,6 +281,27 @@ class Expanded extends Component {
          )
       })
 
+      let certificatesElem = certificates.map((elem, index)=>{
+         return (
+         <div className="row certificates-elem my-3">
+            <div className="col-12">
+               <img src={this.state.certificates[index].photo} alt="" />
+            </div>
+            <div className="col">
+               <input type="text" class="form-control" id="cert-name" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={this.state.certificates[index].name} onChange={(e)=>this.handleChange(e)}/>
+            </div>
+            <div className="col">
+               <input class="form-control" type="file" id="cert-photo" name={'cert-photo-'+index}/>
+            </div>
+            <div className="col-1">
+               <div className="btn btn-danger"
+               data-name='certificates'
+               data-index={index} onClick={(e)=>this.deleteField(e)}>x</div>
+            </div>
+         </div>
+         )
+      })
+
       if(video !== ''){
          video = (
             <video controls>
@@ -328,6 +376,11 @@ class Expanded extends Component {
                      <h4 class="mt-5 mb-4">Рівень володіння мовою</h4>
                      {langLevelElement}
                      <div class="btn btn-success" onClick={()=>this.addLangLevel()}>Додати Мову</div>
+                  </div>
+                  <div class="mb-3 mt-5">
+                     <h4 class="mt-5 mb-4">Сертифікати</h4>
+                     {certificatesElem}
+                     <div class="btn btn-success" onClick={()=>this.addCertificate()}>Додати Сертифікат</div>
                   </div>
                </form>
             </div>
