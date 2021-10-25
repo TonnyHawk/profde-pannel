@@ -121,8 +121,8 @@ class Expanded extends Component {
       let id = this.state.id
       let reqData = new FormData()
       reqData.set('id', id)
-      reqData.set('photo', this.state.photo)
-      if(this.state.video !== '') reqData.set('video', this.state.video)
+      // reqData.set('photo', this.state.photo)
+      // if(this.state.video !== '') reqData.set('video', this.state.video)
       let response = await fetch('http://127.0.0.1:3000/humans/del', {
          method: 'POST',
          headers: {
@@ -284,7 +284,7 @@ class Expanded extends Component {
       let certificatesElem = certificates.map((elem, index)=>{
          return (
          <div className="row certificates-elem my-3">
-            <div className="col-12">
+            <div className="col-12 mb-3">
                <img src={this.state.certificates[index].photo} alt="" />
             </div>
             <div className="col">
