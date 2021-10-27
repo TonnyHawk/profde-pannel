@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import Expanded from './modules/Expanded';
 import ReactDOM from 'react-dom';
 
-async function getCollection(str=null){
-   let add;
-   if(str === null){
-      add = 'humans'
-   }
-   let result;
+async function getCollection(add){
+   let result = [];
    let response = await fetch('https://testproj-328917.appspot.com/'+add);
    if (response.ok) { // если HTTP-статус в диапазоне 200-299
       result = await response.json();
@@ -22,34 +18,37 @@ class App extends Component {
       super(props)
       this.state = {
          search: '',
-         humans: [],
-         selectedHuman: '',
+         items: [],
+         selectedItem: '',
          expandedPage: {
             state: false,
             mode: ''
-         }
+         },
+         // available pages: humans, certificates
+         currentPage: 'humans'
       }
    }
+
    handleChange(e){
       this.setState({search: e.target.value})
    }
 
-   // updateSingleHuman(newElem){
-   //    let index = humans.indexOf(this.state.selectedHuman)
-   //    this.setState(state=>{
-   //       state.humans[index] = newElem
-   //       return state
-   //    })
-   // }
-
-   async loadHumans(){
-      let humans = await getCollection()
-      return humans
+   async loadItems(){
+      let items = []
+      switch(this.state.currentPage){
+         case 'humans':
+            items = await getCollection('humans')
+            break;
+         case 'certificates':
+            items = await getCollection('certificates')
+            break;
+      }
+      console.log(items);
+      this.setState({items})
    }
 
    async componentDidMount(){
-      let humans = await this.loadHumans()
-      this.setState({humans})
+      await this.loadItems()
    }
 
    filtering(str, arr){
@@ -60,9 +59,14 @@ class App extends Component {
       })
    }
 
-   addHuman(){
+   changePage(name){
+      console.log('changing a page to '+name);
+      this.setState({currentPage: name}, ()=>this.loadItems())
+   }
+
+   addItem(){
       this.setState({
-         selectedHuman: '',
+         selectedItem: '',
          expandedPage: {
             state: true,
             mode: 'add'
@@ -72,7 +76,7 @@ class App extends Component {
 
    selectHuman(human){
       this.setState({
-         selectedHuman: human,
+         selectedItem: human,
          expandedPage: {
             state: true,
             mode: 'edit'
@@ -80,20 +84,18 @@ class App extends Component {
       })
    }
    async deselectHuman(){
-      let humans = await this.loadHumans()
-      console.log(humans);
+      await this.loadItems()
       this.setState({
-         selectedHuman: '',
+         selectedItem: '',
          expandedPage: {state: false},
-         humans
       })
    }
 
 
    render() {
-      let {search, humans, selectedHuman, expandedPage} = this.state
-      humans = this.filtering(search, humans)
-      humans = humans.map(human=>{
+      let {search, items, selectedItem, expandedPage, currentPage} = this.state
+      items = this.filtering(search, items)
+      items = items.map(human=>{
          return (
          <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
             <div class="gall-item__photo">
@@ -105,13 +107,50 @@ class App extends Component {
          )
       })
 
-      let expandedPageElem = expandedPage.state ? <Expanded info={expandedPage} human={selectedHuman} funcs={this}/> : '';
+      let expandedPageElem = expandedPage.state ? <Expanded info={expandedPage} pageType={currentPage} human={selectedItem} funcs={this}/> : '';
+      let title = ''
+      switch(currentPage){
+         case 'humans':
+            title = 'Люди'
+            break;
+         case 'certificates':
+            title = 'Сертифікати'
+            break;
+      }
       return (
       // <div class="page" id="page-books">
          <div class="page">
          <div class="page__inner">
             <div class="page__hd">
-               <p class="page__title">Учні</p>
+               <p class="page__title">{title}</p>
+               <nav role="navigation" id='nav'>
+                  <div id="menuToggle">
+                     {/* <!--
+                     A fake / hidden checkbox is used as click reciever,
+                     so you can use the :checked selector on it.
+                     --> */}
+                     <input type="checkbox" />
+                     
+                     {/* <!--
+                     Some spans to act as a hamburger.
+                     
+                     They are acting like a real hamburger,
+                     not that McDonalds stuff.
+                     --> */}
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                     
+                     {/* <!--
+                     Too bad the menu has to be inside of the button
+                     but hey, it's pure CSS magic.
+                     --> */}
+                     <ul id="menu">
+                        <a onClick={()=>this.changePage('humans')}><li>Люди</li></a>
+                        <a onClick={()=>this.changePage('certificates')}><li>Сертифікати</li></a>
+                     </ul>
+                  </div>
+               </nav>
                {/* <div class="page__icon page__icon--left page__close-icon">
                   <i class="bi bi-arrow-left"></i>
                </div> */}
@@ -125,7 +164,7 @@ class App extends Component {
                         <p class="gall__filter bg-active-eng">Deutsch</p>
                         <p class="gall__filter bg-active-deu">English</p>
                      </div>
-                     <div className="btn btn-primary btn-lg" onClick={()=>this.addHuman()}>+</div>
+                     <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
                      <div class="input-group gall__search">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon1">@</span>
@@ -134,7 +173,7 @@ class App extends Component {
                       </div>
                      </div>
                      <div class="gall__bd">
-                        {humans}
+                        {items}
                      </div>
                   </div>
                </div>
