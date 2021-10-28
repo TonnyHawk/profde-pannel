@@ -25,7 +25,7 @@ class App extends Component {
             mode: ''
          },
          // available pages: humans, certificates
-         currentPage: 'humans'
+         currentPage: 'certificates'
       }
    }
 
