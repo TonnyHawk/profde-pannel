@@ -169,17 +169,17 @@ export default function HumansBody(properties){
                            <div class="mb-5">
                               <label class="form-label mb-2">Professor</label>
                               {professorElem}
-                              <div class="btn btn-success" onClick={()=>funcs.addProfessor()}>Додати Школу</div>
+                              <div class="btn btn-success" onClick={()=>funcs.addField('professor', 2)}>Додати Школу</div>
                            </div>
                            <div class="mb-3 mt-5">
                               <h4 class="mt-5 mb-4">Рівень володіння мовою</h4>
                               {langLevelElement}
-                              <div class="btn btn-success" onClick={()=>funcs.addLangLevel()}>Додати Мову</div>
+                              <div class="btn btn-success" onClick={()=>funcs.addField('languages', 2)}>Додати Мову</div>
                            </div>
                            <div class="mb-3 mt-5">
                               <h4 class="mt-5 mb-4">Сертифікати</h4>
                               {certificatesElem}
-                              <div class="btn btn-success" onClick={()=>funcs.addCertificate()}>Додати Сертифікат</div>
+                              <div class="btn btn-success" onClick={()=>funcs.addField('certificates')}>Додати Сертифікат</div>
                            </div>
                         </form>
                      </div>
@@ -188,7 +188,7 @@ export default function HumansBody(properties){
                      <div class="col d-flex justify-content-end">
                         <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
                         <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Додати</div>
-                        <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.showInfo()}>Get Info</div>
+                        <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.addField('')}>Get Info</div>
                      </div>
                   </div>
                </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CertificatesBody from './bodies/certificates';
 import HumansBody from './bodies/humans';
+import BooksBody from './bodies/books';
 
 function strCapitalize(str){
    return str.split(' ').map(elem=>{ // making each first letter a capital
@@ -41,6 +42,15 @@ class Expanded extends Component {
             id: human._id || null,
             required: ['name', 'owner']
          }
+      }else if (pageType === 'books'){
+         state = {
+            name: human.name || '',
+            photo: human.photo || '',
+            about: human.about || '',
+            professor: human.professor || ['Deutsch'],
+            id: human._id || null,
+            required: ['name', 'about', 'professor']
+         }
       }
       this.state = state
       this.form = React.createRef()
@@ -73,36 +83,46 @@ class Expanded extends Component {
       }
    }
 
-   addCertificate(){
-      this.setState(state=>{
-         state.certificates.push({
-            name: '',
-            photo: '',
-         })
-
-         return state
-      })
-   }
-
-   addLangLevel(){
-      this.setState(state=>{
-         if(state.languages.length < 2){
-            state.languages.push({
+   addField(key, limit=null){
+      let template;
+      let errors = null;
+      switch(key){
+         case 'certificates':
+            template = {
+               name: '',
+               photo: '',
+            }
+            break;
+         case 'languages':
+            template = {
                name: '',
                lvl: ''
-            })
-         }
-         return state
-      })
-   }
+            }
+            break;
+         case 'professor':
+            template = [''];
+            break;
+         default:
+            errors = 'function addField is not correct fulfield'
+      }
 
-   addProfessor(){
-      this.setState(state=>{
-         if(state.professor.length < 2){
-            state.professor.push([''])
-         }
-         return state
-      })
+      if(!errors){
+
+         this.setState(state=>{
+            if(limit !== null){ // if the limit is setted up
+               if(state[key].length < limit){
+                  state[key].push(template)
+               }
+            }else{ // if there is no limit
+               state[key].push(template)
+            }
+
+            return state
+         })
+
+      }else{
+         console.log(errors)
+      }
    }
 
    deleteField(e){
@@ -221,7 +241,17 @@ class Expanded extends Component {
                owner,
                id: this.state.id
             }
+         } else if(pageType === 'books'){
+            human = {
+               name: this.state.name,
+               photo: this.state.photo,
+               professor: this.state.professor,
+               about: this.state.about,
+               id: this.state.id
+            }
          }
+
+         reqData.set('itemType', this.props.pageType)
 
          if(formInfo.get('photo').size > 0){ // if we added a new photo to the form
             let photo = formInfo.get('photo')
@@ -236,9 +266,11 @@ class Expanded extends Component {
          let reqUrl = '';
          let serverUrl = 'http://127.0.0.1:3000/'
          let option = ''
+         let serverFunct = 'dbItem';
          if(this.props.info.mode === 'edit') option = '/edit'
-         else if(this.props.info.mode === 'add') option = '/add'
-         reqUrl = serverUrl + pageType + option
+         else if(this.props.info.mode === 'add') {option = '/add';}
+         // reqUrl = serverUrl + pageType + option
+         reqUrl = serverUrl + serverFunct + option
 
 
          let response = await fetch(reqUrl, {
@@ -261,6 +293,8 @@ class Expanded extends Component {
          return <HumansBody state={this.state} props={this.props} funcs={this}/>
       }else if(pageType === 'certificates'){
          return <CertificatesBody state={this.state} props={this.props} funcs={this}/>
+      }else if(pageType === 'books'){
+         return <BooksBody state={this.state} props={this.props} funcs={this}/>
       }
    }
 }

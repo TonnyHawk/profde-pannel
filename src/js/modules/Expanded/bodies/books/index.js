@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CertificatesBody(properties){
    let {state, props, funcs} = properties
-   let {name, photo, professor, owner} = state
+   let {name, photo, professor, about} = state
    let index = 0;
    // creating professor element
    let professorElem = professor.map(elem=>{
@@ -57,10 +57,6 @@ export default function CertificatesBody(properties){
                         <label htmlFor="name" class="form-label">Назва</label>
                         <input type="text" class="form-control" id="name" name='name' placeholder="" required value={name} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
-                     <div class="mb-4">
-                        <label htmlFor="name" class="form-label">Власник</label>
-                        <input type="text" class="form-control" id="owner" name='owner' placeholder="" required value={owner} onChange={(e)=>funcs.handleChange(e)}/>
-                     </div>
                      <div className="row">
                         <div className="col-12 col-md-6">
                            <img src={photo} height={100} alt="" />
@@ -78,6 +74,10 @@ export default function CertificatesBody(properties){
                         <label class="form-label mb-2">Professor</label>
                         {professorElem}
                         <div class="btn btn-success" onClick={()=>funcs.addField('professor', 2)}>Додати Школу</div>
+                     </div>
+                     <div class="mb-4">
+                        <label htmlFor="name" class="form-label">Про книгу</label>
+                        <textarea type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                   </form>
                </div>

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 
 async function getCollection(add){
    let result = [];
-   let response = await fetch('https://testproj-328917.appspot.com/'+add);
+   // let response = await fetch('https://testproj-328917.appspot.com/'+add);
+   let response = await fetch('http://127.0.0.1:3000/'+add, {});
    if (response.ok) { // если HTTP-статус в диапазоне 200-299
       result = await response.json();
    } else {
@@ -24,7 +25,7 @@ class App extends Component {
             state: false,
             mode: ''
          },
-         // available pages: humans, certificates
+         // available pages: humans, certificates, books
          currentPage: 'humans'
       }
    }
@@ -41,6 +42,9 @@ class App extends Component {
             break;
          case 'certificates':
             items = await getCollection('certificates')
+            break;
+         case 'books':
+            items = await getCollection('books')
             break;
       }
       console.log(items);
@@ -116,6 +120,9 @@ class App extends Component {
          case 'certificates':
             title = 'Сертифікати'
             break;
+         case 'books':
+            title = 'Книги';
+            break;
       }
       return (
       // <div class="page" id="page-books">
@@ -148,6 +155,7 @@ class App extends Component {
                      <ul id="menu">
                         <a onClick={()=>this.changePage('humans')}><li>Люди</li></a>
                         <a onClick={()=>this.changePage('certificates')}><li>Сертифікати</li></a>
+                        <a onClick={()=>this.changePage('books')}><li>Книги</li></a>
                      </ul>
                   </div>
                </nav>
