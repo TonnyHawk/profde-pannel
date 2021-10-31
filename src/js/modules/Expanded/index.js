@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CertificatesBody from './bodies/certificates';
 import HumansBody from './bodies/humans';
 import BooksBody from './bodies/books';
+import CoursesBody from './bodies/courses';
 
 function strCapitalize(str){
    return str.split(' ').map(elem=>{ // making each first letter a capital
@@ -48,6 +49,16 @@ class Expanded extends Component {
             photo: human.photo || '',
             about: human.about || '',
             professor: human.professor || ['Deutsch'],
+            id: human._id || null,
+            required: ['name', 'about', 'professor']
+         }
+      }else if(pageType === 'courses'){
+         state = {
+            name: human.name || '',
+            about: human.about || '',
+            professor: human.professor || ['Deutsch'],
+            features: human.features || [],
+            themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
             id: human._id || null,
             required: ['name', 'about', 'professor']
          }
@@ -249,13 +260,27 @@ class Expanded extends Component {
                about: this.state.about,
                id: this.state.id
             }
+         } else if(pageType === 'courses'){
+            human = {
+               name: this.state.name,
+               about: this.state.about,
+               professor: this.state.professor,
+               features: this.state.features,
+               themes: this.state.themes,
+               id: this.state.id
+            }
+
+            console.log(formInfo);
          }
 
          reqData.set('itemType', this.props.pageType)
-
-         if(formInfo.get('photo').size > 0){ // if we added a new photo to the form
-            let photo = formInfo.get('photo')
-            reqData.set('photo', photo, 'avatar.jpg')
+         try{
+            if(formInfo.get('photo').size > 0){ // if we added a new photo to the form
+               let photo = formInfo.get('photo')
+               reqData.set('photo', photo, 'avatar.jpg')
+            }
+         }catch{
+            console.log('no photo existed in this form');
          }
 
          alert('data is ready to deploy')
@@ -295,6 +320,8 @@ class Expanded extends Component {
          return <CertificatesBody state={this.state} props={this.props} funcs={this}/>
       }else if(pageType === 'books'){
          return <BooksBody state={this.state} props={this.props} funcs={this}/>
+      }else if(pageType === 'courses'){
+         return <CoursesBody state={this.state} props={this.props} funcs={this}/>
       }
    }
 }

@@ -25,8 +25,10 @@ class App extends Component {
             state: false,
             mode: ''
          },
-         // available pages: humans, certificates, books
-         currentPage: 'humans'
+         // all, Deutsch, English
+         filter: 'all',
+         // available pages: humans, certificates, books, courses
+         currentPage: 'courses'
       }
    }
 
@@ -36,30 +38,67 @@ class App extends Component {
 
    async loadItems(){
       let items = []
-      switch(this.state.currentPage){
-         case 'humans':
-            items = await getCollection('humans')
-            break;
-         case 'certificates':
-            items = await getCollection('certificates')
-            break;
-         case 'books':
-            items = await getCollection('books')
-            break;
-      }
+      // switch(this.state.currentPage){
+      //    case 'humans':
+      //       items = await getCollection('humans')
+      //       break;
+      //    case 'certificates':
+      //       items = await getCollection('certificates')
+      //       break;
+      //    case 'books':
+      //       items = await getCollection('books')
+      //       break;
+      //    case 'courses':
+      //       items = await getCollection('courses')
+      // }
+      items = await getCollection(this.state.currentPage)
       console.log(items);
       this.setState({items})
    }
 
    async componentDidMount(){
       await this.loadItems()
+      let arr = {1: ''}
+      console.log(arr.length);
+      if(!arr.length) console.log('arr');
+      else console.log('hublo');
    }
 
-   filtering(str, arr){
+   propertyFilter(items, prop, value){
+      if(value !== 'all'){
+         return items.filter(elem=>{
+            if(typeof elem[prop] === 'object'){
+               if(elem[prop].length){ // if it is an array
+                  for(let i = 0; i < elem[prop].length; i++){
+                     if(elem[prop][i] === value) {
+                        return elem
+                     }
+                  }
+               }
+            }else {
+               if(elem[prop] === value){
+                  return elem
+               }
+            }
+         })
+      }else{
+         return items
+      }
+   }
+
+   nameFilter(str, arr){
+      arr = this.propertyFilter(arr, 'professor', this.state.filter)
       return arr.filter(elem=>{
          let name = elem.name.toLowerCase()
          str = str.toLowerCase()
          if(name.includes(str)) return elem
+      })
+   }
+
+   toggleFilter(val){
+      this.setState(state=>{
+         state.filter = val
+         return state
       })
    }
 
@@ -98,7 +137,7 @@ class App extends Component {
 
    render() {
       let {search, items, selectedItem, expandedPage, currentPage} = this.state
-      items = this.filtering(search, items)
+      items = this.nameFilter(search, items)
       items = items.map(human=>{
          return (
          <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
@@ -123,6 +162,8 @@ class App extends Component {
          case 'books':
             title = 'Книги';
             break;
+         case 'courses':
+            title = 'Курси'
       }
       return (
       // <div class="page" id="page-books">
@@ -156,6 +197,7 @@ class App extends Component {
                         <a onClick={()=>this.changePage('humans')}><li>Люди</li></a>
                         <a onClick={()=>this.changePage('certificates')}><li>Сертифікати</li></a>
                         <a onClick={()=>this.changePage('books')}><li>Книги</li></a>
+                        <a onClick={()=>this.changePage('courses')}><li>Курси</li></a>
                      </ul>
                   </div>
                </nav>
@@ -168,9 +210,9 @@ class App extends Component {
                   <div class="gall__inner">
                      <div class="gall__hd">
                         <div class="gall__filters">
-                        <p class="gall__filter is-active bg-active-main">Всі</p>
-                        <p class="gall__filter bg-active-eng">Deutsch</p>
-                        <p class="gall__filter bg-active-deu">English</p>
+                        <p class={`gall__filter ${this.state.filter === 'all' ? 'is-active' : ''} bg-active-main`} onClick={()=>this.toggleFilter('all')}>Всі</p>
+                        <p class={`gall__filter ${this.state.filter === 'Deutsch' ? 'is-active' : ''} bg-active-deu`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</p>
+                        <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
                      </div>
                      <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
                      <div class="input-group gall__search">
