@@ -1,4 +1,5 @@
 import React from 'react';
+import SemanticDropdown from '../../../../components/SemanticDropdown'
 
 export default function CoursesBody(properties){
    let {state, props, funcs} = properties
@@ -73,6 +74,9 @@ export default function CoursesBody(properties){
                      <div class="mb-4">
                         <label class="form-label">Теми граматики</label>
                         <textarea type="text" class="form-control" data-name='themes' name='content' data-index={1} placeholder="" required value={themes[1].content} onChange={(e)=>funcs.handleChange(e)}/>
+                     </div>
+                     <div className="mb-4">
+                        {<SemanticDropdown funcs={funcs}/>}
                      </div>
                   </form>
                </div>

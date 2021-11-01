@@ -38,19 +38,6 @@ class App extends Component {
 
    async loadItems(){
       let items = []
-      // switch(this.state.currentPage){
-      //    case 'humans':
-      //       items = await getCollection('humans')
-      //       break;
-      //    case 'certificates':
-      //       items = await getCollection('certificates')
-      //       break;
-      //    case 'books':
-      //       items = await getCollection('books')
-      //       break;
-      //    case 'courses':
-      //       items = await getCollection('courses')
-      // }
       items = await getCollection(this.state.currentPage)
       console.log(items);
       this.setState({items})
