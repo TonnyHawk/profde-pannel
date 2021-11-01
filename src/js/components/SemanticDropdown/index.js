@@ -28,19 +28,10 @@ class semanticDropdown extends Component {
       let items = await getCollection('books')
       this.setState({items})
    }
-
-   handleDropDownSelect = (event, data) => {
-      console.log(data.value);
-      this.setState({selectedItems: data.value})
-   };
-   componentDidUpdate(prevProps, prevState) {
-      console.log(this.state.selectedItems);
-   }
    
    
    render() {
       let {funcs} = this.props
-      console.log(funcs.state);
       let items = this.state.items.map(elem=>{
          return { key: elem._id, text: elem.name, value: elem._id }
       })
