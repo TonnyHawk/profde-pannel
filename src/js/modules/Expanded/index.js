@@ -60,7 +60,7 @@ class Expanded extends Component {
             features: human.features || [],
             themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
             id: human._id || null,
-            books: human.books || [{ key: '3300', text: 'chebuki', value: 'pizzazz' }],
+            books: human.books || [],
             required: ['name', 'about', 'professor']
          }
       }
@@ -68,7 +68,7 @@ class Expanded extends Component {
       this.form = React.createRef()
    }
    
-   handleChange(e, data=null){
+   handleChange(e){
       let key = e.target.name
       let value = e.target.value
       if(e.target.getAttribute('data-index')){ // meens that we process select
@@ -89,16 +89,15 @@ class Expanded extends Component {
             })
          }
       } else{
-         if(data===null){
-            this.setState({
-               [key]: value
-            })
-         }else{ // handling multiple select
-            console.log(this.state);
-            // this.setState({books: data.value})
-         }
+         this.setState({
+            [key]: value
+         })
       }
    }
+
+   handleDropDownSelect = (e, data=null, binding=null) => {
+      binding.setState({books: data.value})
+   };
 
    addField(key, limit=null){
       let template;

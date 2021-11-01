@@ -53,7 +53,7 @@ class semanticDropdown extends Component {
          search
          selection
          options={items}
-         onChange={funcs.handleChange}
+         onChange={(e, data)=>funcs.handleDropDownSelect(e, data, funcs)}
          value={funcs.state.books}
        />
       );
