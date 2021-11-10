@@ -295,7 +295,8 @@ class Expanded extends Component {
 
          // forming request string
          let reqUrl = '';
-         let serverUrl = 'http://127.0.0.1:3000/'
+         // let serverUrl = 'http://127.0.0.1:3000/'
+         let serverUrl = 'http://91.219.61.167:3000/'
          let option = ''
          let serverFunct = 'dbItem';
          if(this.props.info.mode === 'edit') option = '/edit'
