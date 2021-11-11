@@ -25,7 +25,7 @@ class Expanded extends Component {
          state = {
             name: human.name || '',
             about: human.about || '',
-            video: human.video || '',
+            video: human.video || [{link: '', professor: 'Deutsch'}],
             photo: human.photo || '',
             languages: human.languages || [{name: 'Німецька', lvl: 'A1'}],
             professor: human.professor || ['Deutsch'],
@@ -117,6 +117,9 @@ class Expanded extends Component {
             break;
          case 'professor':
             template = [''];
+            break;
+         case 'video':
+            template = {link: '', professor: 'Deutsch'};
             break;
          default:
             errors = 'function addField is not correct fulfield'
@@ -239,12 +242,6 @@ class Expanded extends Component {
                certificates
             }
 
-            // media files
-            if(formInfo.get('video').size > 0){ // if we added a new video to the form
-               let video = formInfo.get('video')
-               reqData.set('video', video, 'video.mp4')
-            }
-
          } else if(pageType === 'certificates'){
 
             // data preprocessing
@@ -280,23 +277,32 @@ class Expanded extends Component {
          }
 
          reqData.set('itemType', this.props.pageType)
+         alert('data is ready to deploy')
+         console.log(human);
+         reqData.set('info', JSON.stringify(human))
+
+         if(pageType === 'humans'){
+            // media files
+            human.video.forEach(elem=>{
+               if(formInfo.get('video-'+elem.professor).size > 0){ // if we added a new video to the form
+                  let video = formInfo.get('video-'+elem.professor)
+                  reqData.set('video-'+elem.professor, video, `video-${elem.professor}.mp4`)
+               }
+            })
+         }
          try{
             if(formInfo.get('photo').size > 0){ // if we added a new photo to the form
                let photo = formInfo.get('photo')
-               reqData.set('photo', photo, 'avatar.jpg')
+               reqData.set('photo', photo, 'avatar')
             }
          }catch{
             console.log('no photo existed in this form');
          }
 
-         alert('data is ready to deploy')
-         console.log(human);
-         reqData.set('info', JSON.stringify(human))
-
          // forming request string
          let reqUrl = '';
-         // let serverUrl = 'http://127.0.0.1:3000/'
-         let serverUrl = 'http://91.219.61.167:3000/'
+         let serverUrl = 'http://127.0.0.1:3000/'
+         // let serverUrl = 'http://91.219.61.167:3000/'
          let option = ''
          let serverFunct = 'dbItem';
          if(this.props.info.mode === 'edit') option = '/edit'
@@ -316,7 +322,7 @@ class Expanded extends Component {
           let result = await response.text();
           console.log(result);
 
-          this.props.funcs.deselectHuman()
+         //  this.props.funcs.deselectHuman()
       }
    }
    render() {

@@ -3,9 +3,59 @@ import React from 'react';
 export default function HumansBody(properties){
    let {state, props, funcs} = properties
          let {name, photo, video, about, languages, professor, certificates, role} = state
-         let index = 0;
+
+         // let v = [
+         //    {
+         //       link: '',
+         //       professor: 'English'
+         //    }
+         // ]
+         let videoElem = video.map((elem, index)=>{
+
+            let video = ''
+            if(elem.link !== ''){
+               video = (
+                  <video controls className='mb-3'>
+                     <source src={elem.link} type="video/mp4"/>
+                     Your browser does not support the video tag.
+                  </video>
+               )
+            }
+
+            let prof = (
+               <div class="row professor-elem mb-3" data-name='video'>
+                  <div class="col-11">
+                     <select class="form-select" aria-label="select example" id="professor" 
+                     name='professor'
+                     data-index={index}
+                     data-name={'video'}
+                     value={elem.professor}
+                     onChange={(e)=>funcs.handleChange(e)}>
+                        <option value='Deutsch'>Deutsch</option>
+                        <option value="English">English</option>
+                     </select>
+                  </div>
+                  <div className="col-1">
+                     <div className="btn btn-danger"
+                     data-name='video'
+                     data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
+                  </div>
+               </div>
+            )
+
+            return (
+               <div class="mb-4 video-elem">
+                  <label class="form-label">Відео</label>
+                  {video}
+                  <input class="form-control mb-3" type="file" name={'video-'+elem.professor}/>
+                  {prof}
+                  <div class="btn btn-success" onClick={()=>funcs.addField('video', 2)}>Додати Школу</div>
+               </div>
+            )
+         })
+
          // creating professor element
-         let professorElem = professor.map(elem=>{
+         let professorElem = professor.map((elem, index)=>{
             let content = (
             <div class="row professor-elem mb-3" data-name='professor'>
                <div class="col-11">
@@ -25,13 +75,11 @@ export default function HumansBody(properties){
                </div>
             </div>
             )
-            index++;
             return content
          })
 
-         index = 0;
          // languages
-         let langLevelElement = languages.map(lang=>{
+         let langLevelElement = languages.map((lang, index)=>{
             let langType = (
             <select class="form-select" aria-label="Default select example" id="lang-type" 
             name='name' 
@@ -56,7 +104,6 @@ export default function HumansBody(properties){
                      <option value="C1">C1</option>
                   </select>
                );
-               index++;
             return (
             <div class="row language-elem my-3" data-name='lang-level'>
                <div class="col">
@@ -94,15 +141,6 @@ export default function HumansBody(properties){
             </div>
             )
          })
-
-         if(video !== ''){
-            video = (
-               <video controls>
-                  <source src={video} type="video/mp4"/>
-                  Your browser does not support the video tag.
-               </video>
-            )
-         }
 
          let style = {
             zIndex: 100, 
@@ -145,7 +183,7 @@ export default function HumansBody(properties){
                                  <img src={photo} height={100} alt="" />
                               </div>
                               <div className="col-12 col-md-6">
-                                 {video}
+                                 {/* {video} */}
                               </div>
                            </div>
                            <div class="row">
@@ -156,10 +194,7 @@ export default function HumansBody(properties){
                                  </div>
                               </div>
                               <div class="col-12 col-md-6">
-                                 <div class="mb-4">
-                                    <label htmlFor="video" class="form-label">Відео</label>
-                                    <input class="form-control" type="file" id="video" name='video'/>
-                                 </div>
+                                 {videoElem}
                               </div>
                            </div>
                            <div class="mb-4">
