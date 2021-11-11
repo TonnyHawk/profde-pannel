@@ -122,21 +122,45 @@ export default function HumansBody(properties){
          })
 
          let certificatesElem = certificates.map((elem, index)=>{
+
+            let prof = (
+               <div class="row professor-elem mt-3" data-name='professor'>
+                  <div class="col-11">
+                     <select class="form-select" aria-label="select example" id="professor" 
+                     name='professor'
+                     data-index={index}
+                     data-name='certificates'
+                     value={elem.professor}
+                     onChange={(e)=>funcs.handleChange(e)}>
+                        <option value='Deutsch'>Deutsch</option>
+                        <option value="English">English</option>
+                     </select>
+                  </div>
+               </div>
+            )
+
             return (
             <div className="row certificates-elem my-3">
                <div className="col-12 mb-3">
                   <img src={funcs.state.certificates[index].photo} alt="" />
                </div>
-               <div className="col">
-                  <input type="text" class="form-control" id="cert-name" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={funcs.state.certificates[index].name} onChange={(e)=>funcs.handleChange(e)}/>
+               <div className="row">
+                  <div className="col">
+                     <input type="text" class="form-control" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={funcs.state.certificates[index].name} onChange={(e)=>funcs.handleChange(e)}/>
+                  </div>
+                  <div className="col">
+                     <input class="form-control" type="file" name={`cert-${elem.professor}-`+index}/>
+                  </div>
+                  <div className="col-1">
+                     <div className="btn btn-danger"
+                     data-name='certificates'
+                     data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
+                  </div>
                </div>
-               <div className="col">
-                  <input class="form-control" type="file" id="cert-photo" name={'cert-photo-'+index}/>
-               </div>
-               <div className="col-1">
-                  <div className="btn btn-danger"
-                  data-name='certificates'
-                  data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
+               <div className="row">
+                  <div className="col">
+                     {prof}
+                  </div>
                </div>
             </div>
             )

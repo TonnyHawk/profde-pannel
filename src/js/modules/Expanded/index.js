@@ -107,6 +107,7 @@ class Expanded extends Component {
             template = {
                name: '',
                photo: '',
+               professor: 'Deutsch'
             }
             break;
          case 'languages':
@@ -221,10 +222,10 @@ class Expanded extends Component {
             let certificates = this.state.certificates;
             certificates = certificates.map((elem, index)=>{
                // в якийх є файли з тих залить
-               let photo = formInfo.get('cert-photo-'+index)
+               let photo = formInfo.get(`cert-${elem.professor}-`+index)
                if(photo.size > 0){
                   elem.photo = photo;
-                  reqData.set('cert-photo-'+index, photo, 'cert-'+index+'.jpg')
+                  // reqData.set(`certificates/${elem.professor}/cert-photo-`+index, photo, 'cert-'+index+'.jpg')
                }
                return elem
             })
@@ -288,6 +289,17 @@ class Expanded extends Component {
                   let video = formInfo.get('video-'+elem.professor)
                   reqData.set('video-'+elem.professor, video, `video-${elem.professor}.mp4`)
                }
+            })
+
+            this.state.certificates.forEach((elem, index)=>{
+               // в якийх є файли з тих залить
+               let fieldName = `cert-${elem.professor}-`+index
+               let photo = formInfo.get(fieldName)
+               if(photo.size > 0){
+                  elem.photo = photo;
+                  reqData.set(fieldName, photo, 'cert-'+index+'.jpg')
+               }
+               return elem
             })
          }
          try{
