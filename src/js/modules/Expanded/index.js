@@ -4,6 +4,8 @@ import HumansBody from './bodies/humans';
 import BooksBody from './bodies/books';
 import CoursesBody from './bodies/courses';
 
+let serverUrl = 'http://91.219.61.167:3000/'
+
 function strCapitalize(str){
    return str.split(' ').map(elem=>{ // making each first letter a capital
       let newStr = elem;
@@ -107,7 +109,7 @@ class Expanded extends Component {
             template = {
                name: '',
                photo: '',
-               professor: 'Deutsch'
+               professor: 'Deutsch',
             }
             break;
          case 'languages':
@@ -188,8 +190,7 @@ class Expanded extends Component {
       let reqData = new FormData()
       reqData.set('id', id)
       reqData.set('itemType', this.props.pageType)
-
-      let response = await fetch('http://127.0.0.1:3000/dbItem/del', {
+      let response = await fetch(`${serverUrl}dbItem/del`, {
          method: 'POST',
          headers: {
             encType: 'multipart/form-data'
@@ -313,7 +314,7 @@ class Expanded extends Component {
 
          // forming request string
          let reqUrl = '';
-         let serverUrl = 'http://127.0.0.1:3000/'
+         //  let serverUrl = 'http://127.0.0.1:3000/'
          // let serverUrl = 'http://91.219.61.167:3000/'
          let option = ''
          let serverFunct = 'dbItem';
@@ -322,6 +323,7 @@ class Expanded extends Component {
          // reqUrl = serverUrl + pageType + option
          reqUrl = serverUrl + serverFunct + option
 
+         this.props.funcs.setUpLoader(true, 'Зберігаємо данні')
 
          let response = await fetch(reqUrl, {
             method: 'POST',
@@ -330,11 +332,12 @@ class Expanded extends Component {
              },
             body: reqData
           });
-          
+      
           let result = await response.text();
+          this.props.funcs.setUpLoader(false)
           console.log(result);
 
-         //  this.props.funcs.deselectHuman()
+          this.props.funcs.deselectHuman()
       }
    }
    render() {
