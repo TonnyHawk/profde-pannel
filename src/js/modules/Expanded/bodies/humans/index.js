@@ -44,13 +44,11 @@ export default function HumansBody(properties){
             )
 
             return (
-               <div class="mb-4 video-elem">
-                  <label class="form-label">Відео</label>
+               <>
                   {video}
                   <input class="form-control mb-3" type="file" name={'video-'+elem.professor}/>
                   {prof}
-                  <div class="btn btn-success" onClick={()=>funcs.addField('video', 2)}>Додати Школу</div>
-               </div>
+               </>
             )
          })
 
@@ -218,7 +216,11 @@ export default function HumansBody(properties){
                                  </div>
                               </div>
                               <div class="col-12 col-md-6">
-                                 {videoElem}
+                                 <div class="mb-4 video-elem">
+                                    <label class="form-label">Відео</label><br/>
+                                    {videoElem}
+                                    <div class="btn btn-success" onClick={()=>funcs.addField('video', 2)}>Додати Відео</div>
+                                 </div>
                               </div>
                            </div>
                            <div class="mb-4">
@@ -246,7 +248,7 @@ export default function HumansBody(properties){
                   <div class="row">
                      <div class="col d-flex justify-content-end">
                         <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
-                        <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Додати</div>
+                        <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Зберегти</div>
                         <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.addField('')}>Get Info</div>
                      </div>
                   </div>

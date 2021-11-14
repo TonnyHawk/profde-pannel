@@ -27,7 +27,7 @@ class Expanded extends Component {
          state = {
             name: human.name || '',
             about: human.about || '',
-            video: human.video || [{link: '', professor: 'Deutsch'}],
+            video: human.video || [],
             photo: human.photo || '',
             languages: human.languages || [{name: 'Німецька', lvl: 'A1'}],
             professor: human.professor || ['Deutsch'],
@@ -151,7 +151,7 @@ class Expanded extends Component {
       let key = e.target.getAttribute('data-name');
       let index = e.target.getAttribute('data-index')
       let minNumOfElements = 1
-      if(key === 'certificates') minNumOfElements = 0
+      if(key === 'certificates' || key === 'video') minNumOfElements = 0
       this.setState(state=>{
          if(state[key].length > minNumOfElements){
             state[key] = state[key].filter(elem=>{
