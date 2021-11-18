@@ -1,12 +1,12 @@
 import { Dropdown } from 'semantic-ui-react'
+import serverUrl from '../../globals';
 // import 'semantic-ui-css/components/dropdown.min.css'
 
 import React, { Component } from 'react';
 
 async function getCollection(add){
    let result = [];
-   // let response = await fetch('https://testproj-328917.appspot.com/'+add);
-   let response = await fetch('http://127.0.0.1:3000/'+add, {});
+   let response = await fetch(serverUrl+add, {});
    if (response.ok) { // если HTTP-статус в диапазоне 200-299
       result = await response.json();
    } else {

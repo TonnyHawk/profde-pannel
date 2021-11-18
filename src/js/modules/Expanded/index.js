@@ -3,8 +3,8 @@ import CertificatesBody from './bodies/certificates';
 import HumansBody from './bodies/humans';
 import BooksBody from './bodies/books';
 import CoursesBody from './bodies/courses';
+import serverUrl from '../../globals';
 
-let serverUrl = 'http://91.219.61.167:3000/'
 
 function strCapitalize(str){
    return str.split(' ').map(elem=>{ // making each first letter a capital
@@ -314,8 +314,6 @@ class Expanded extends Component {
 
          // forming request string
          let reqUrl = '';
-         //  let serverUrl = 'http://127.0.0.1:3000/'
-         // let serverUrl = 'http://91.219.61.167:3000/'
          let option = ''
          let serverFunct = 'dbItem';
          if(this.props.info.mode === 'edit') option = '/edit'

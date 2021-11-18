@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Expanded from './modules/Expanded';
 import ReactDOM from 'react-dom';
 import Loader from './components/Loader'
+import serverUrl from './globals';
+
 
 async function getCollection(add){
    let result = [];
-   // let response = await fetch('https://testproj-328917.appspot.com/'+add);
-   let response = await fetch('http://91.219.61.167:3000/'+add, {});
-   // let response = await fetch('http://127.0.0.1:3000/'+add, {});
+   let response = await fetch(serverUrl+add, {});
    if (response.ok) { // если HTTP-статус в диапазоне 200-299
       result = await response.json();
    } else {
