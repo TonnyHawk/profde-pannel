@@ -65,15 +65,15 @@ export default function CoursesBody(properties){
                      </div>
                      <div class="mb-4">
                         <label class="form-label">Про Курс</label>
-                        <textarea type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
+                        <textarea rows='10' type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                      <div class="mb-4">
                         <label class="form-label">Теми усного мовлення</label>
-                        <textarea type="text" class="form-control" data-name='themes' name='content' data-index={0} placeholder="" required value={themes[0].content} onChange={(e)=>funcs.handleChange(e)}/>
+                        <textarea rows='10' type="text" class="form-control" data-name='themes' name='content' data-index={0} placeholder="" required value={themes[0].content} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                      <div class="mb-4">
                         <label class="form-label">Теми граматики</label>
-                        <textarea type="text" class="form-control" data-name='themes' name='content' data-index={1} placeholder="" required value={themes[1].content} onChange={(e)=>funcs.handleChange(e)}/>
+                        <textarea rows='10' type="text" class="form-control" data-name='themes' name='content' data-index={1} placeholder="" required value={themes[1].content} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                      <div className="mb-4">
                         {<SemanticDropdown funcs={funcs}/>}

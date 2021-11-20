@@ -225,7 +225,7 @@ export default function HumansBody(properties){
                            </div>
                            <div class="mb-4">
                               <label htmlFor="about" class="form-label">Загальне інфо</label>
-                              <textarea class="form-control" id="about" name='about' rows="3" value={about} onChange={(e)=>funcs.handleChange(e)} required></textarea>
+                              <textarea rows='10' class="form-control" id="about" name='about' value={about} onChange={(e)=>funcs.handleChange(e)} required></textarea>
                            </div>
                            <div class="mb-5">
                               <label class="form-label mb-2">Professor</label>

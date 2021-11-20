@@ -30,7 +30,7 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses
-         currentPage: 'humans',
+         currentPage: 'books',
          loader: {display: false, message: ''}
       }
    }

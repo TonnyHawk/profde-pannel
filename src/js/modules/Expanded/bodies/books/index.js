@@ -77,7 +77,7 @@ export default function CertificatesBody(properties){
                      </div>
                      <div class="mb-4">
                         <label htmlFor="name" class="form-label">Про книгу</label>
-                        <textarea type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
+                        <textarea rows='10' type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                   </form>
                </div>
