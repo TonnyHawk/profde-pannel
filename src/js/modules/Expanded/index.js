@@ -190,6 +190,9 @@ class Expanded extends Component {
       let reqData = new FormData()
       reqData.set('id', id)
       reqData.set('itemType', this.props.pageType)
+
+      this.props.funcs.setUpLoader(true, 'Видалення...')
+
       let response = await fetch(`${serverUrl}dbItem/del`, {
          method: 'POST',
          headers: {
@@ -200,6 +203,8 @@ class Expanded extends Component {
        
        let result = await response.text();
        console.log(result);
+
+       this.props.funcs.setUpLoader(false);
 
        this.props.funcs.deselectHuman()
    }
