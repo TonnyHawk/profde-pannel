@@ -3,7 +3,9 @@ import Expanded from './modules/Expanded';
 import ReactDOM from 'react-dom';
 import Loader from './components/Loader'
 import serverUrl from './globals';
+import SortList from './components/SortList'
 
+import './style.css';
 
 async function getCollection(add){
    let result = [];
@@ -30,9 +32,10 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses
-         currentPage: 'books',
+         currentPage: 'humans',
          loader: {display: false, message: ''}
       }
+      this.rootElem = React.createRef()
    }
 
    setUpLoader(display, message=''){
@@ -44,18 +47,22 @@ class App extends Component {
    }
 
    async loadItems(){
-      let items = []
-      items = await getCollection(this.state.currentPage)
-      console.log(items);
+      let items = [];
+      let collection = null;
+      switch(this.state.currentPage){
+         case 'sort-humans':
+            collection = 'humans';
+            break;
+         default:
+            collection = this.state.currentPage;
+            break;
+      }
+      items = await getCollection(collection)
       this.setState({items})
    }
 
    async componentDidMount(){
       await this.loadItems()
-      let arr = {1: ''}
-      console.log(arr.length);
-      if(!arr.length) console.log('arr');
-      else console.log('hublo');
    }
 
    propertyFilter(items, prop, value){
@@ -128,21 +135,78 @@ class App extends Component {
       })
    }
 
+   // sendData(){
+   //    let {items} = this.props
+   //    let result = []
+   //    listItems.forEach((elem, index)=>{
+   //       let id = elem.querySelector('.person-name').getAttribute('data-id')
+   //       let item = items.find(human=>{
+   //          return human._id === id
+   //       })
+   //       item.order[this.props.filter] = index
+   //       result.push(item)
+   //    })
+   //    console.log(result);
+
+   //    //setting up fields
+   //    reqData.set('itemType', this.props.pageType)
+   //    alert('data is ready to deploy')
+   //    console.log(human);
+   //    reqData.set('info', JSON.stringify(human))
+
+   //    // forming request string
+   //    let reqUrl = '';
+   //    let option = ''
+   //    let serverFunct = 'dbItem';
+   //    if(this.props.info.mode === 'edit') option = '/edit'
+   //    else if(this.props.info.mode === 'add') {option = '/add';}
+   //    // reqUrl = serverUrl + pageType + option
+   //    reqUrl = serverUrl + serverFunct + option
+
+   //    this.props.funcs.setUpLoader(true, 'Зберігаємо данні')
+
+   //    let response = await fetch(reqUrl, {
+   //       method: 'POST',
+   //       headers: {
+   //          encType: 'multipart/form-data'
+   //          },
+   //       body: reqData
+   //       });
+   
+   //       let result = await response.text();
+   //       this.props.funcs.setUpLoader(false)
+   //       console.log(result);
+   // }
+
 
    render() {
       let {search, items, selectedItem, expandedPage, currentPage} = this.state
+
       items = this.nameFilter(search, items)
-      items = items.map(human=>{
+      items = items.map((human, ind)=>{
          return (
-         <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
-            <div class="gall-item__photo">
-               <img src={human.photo} alt="" class="gall-item__img" />
+            <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
+               <div class="gall-item__photo">
+                  <img src={human.photo} alt="" class="gall-item__img" />
+               </div>
+               <p class="gall-item__title">{human.name}</p>
+               {/* <p class="gall-item__descr">Анна Богуцька</p> */}
             </div>
-            <p class="gall-item__title">{human.name}</p>
-            {/* <p class="gall-item__descr">Анна Богуцька</p> */}
-         </div>
          )
       })
+
+      let content;
+      if(currentPage === 'sort-humans'){
+
+         content = <SortList items={this.state.items} filter={this.state.filter} pageType={currentPage} funcs={this}/>
+
+      }else{
+         content = (
+            <div class="gall__bd">
+               {items}
+            </div>
+         )
+      }
 
       let expandedPageElem = expandedPage.state ? <Expanded info={expandedPage} pageType={currentPage} human={selectedItem} funcs={this}/> : '';
       let title = ''
@@ -157,11 +221,14 @@ class App extends Component {
             title = 'Книги';
             break;
          case 'courses':
-            title = 'Курси'
+            title = 'Курси';
+            break;
+         default:
+            title = 'Впорядкування';
       }
       return (
       // <div class="page" id="page-books">
-         <div class="page">
+      <div class="page" ref={this.rootElem}>
          <div class="page__inner">
             <div class="page__hd">
                <p class="page__title">{title}</p>
@@ -209,6 +276,7 @@ class App extends Component {
                         <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
                      </div>
                      <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
+                     <div className="btn btn-primary btn-lg" onClick={()=>this.changePage('sort-humans')}>Sort</div>
                      <div class="input-group gall__search">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon1">@</span>
@@ -216,9 +284,7 @@ class App extends Component {
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value={search} onChange={(e)=>this.handleChange(e)}/>
                       </div>
                      </div>
-                     <div class="gall__bd">
-                        {items}
-                     </div>
+                     {content}
                   </div>
                </div>
             </div>
