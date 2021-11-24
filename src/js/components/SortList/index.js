@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import serverUrl from '../../globals';
+import {sortArr} from '../../functions';
 
 let dragStartIndex;
-
-function sortArr(arr, filter){
-   let newArr = []
-   let length = arr.length;
-   for(let i = 0; i < length; i++){
-      let foundIndex = arr.findIndex(elem=>elem.order[filter] === i);
-      newArr.push(arr[foundIndex])
-   }
-
-   return newArr
-}
 
 class SortList extends Component {
    constructor(props){
