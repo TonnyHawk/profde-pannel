@@ -197,8 +197,8 @@ class App extends Component {
 
       let content;
       if(currentPage === 'sort-humans'){
-
-         content = <SortList items={this.state.items} filter={this.state.filter} pageType={currentPage} funcs={this}/>
+         let data = this.propertyFilter(this.state.items, 'professor', this.state.filter)
+         content = <SortList items={data} filter={this.state.filter} pageType={currentPage} funcs={this}/>
 
       }else{
          content = (
