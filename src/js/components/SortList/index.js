@@ -3,12 +3,24 @@ import serverUrl from '../../globals';
 
 let dragStartIndex;
 
+function sortArr(arr, filter){
+   let newArr = []
+   let length = arr.length;
+   for(let i = 0; i < length; i++){
+      let foundIndex = arr.findIndex(elem=>elem.order[filter] === i);
+      newArr.push(arr[foundIndex])
+   }
+
+   return newArr
+}
+
 class SortList extends Component {
    constructor(props){
       super(props)
       this.sendData = this.sendData.bind(this)
+      let items = sortArr(props.items, props.filter)
       this.state = {
-         listItems: props.items,
+         listItems: items,
       }
    }
 
@@ -50,8 +62,8 @@ class SortList extends Component {
    
    dragDrop(e, root) {
       // console.log('Event: ', 'drop');
-      let elem = e.target
-      const dragEndIndex = +elem.closest('li').getAttribute('data-index');
+      let elem = e.target.closest('li')
+      const dragEndIndex = +elem.getAttribute('data-index');
       root.swapItems(dragStartIndex, dragEndIndex);
       
       elem.classList.remove('over');
@@ -78,29 +90,33 @@ class SortList extends Component {
    componentDidMount() {
       this.addEventListeners(this.rootElem.current)
    }
+
+   componentDidUpdate(prevProps, prevState) {
+      if(this.props.items.length !== this.state.listItems.length){
+         let listItems = sortArr(this.props.items, this.props.filter);
+         this.setState({listItems})
+      }
+   }
+   
    
    
    
 
    async sendData(){
-      let {items} = this.props
       let {listItems} = this.state
       let result = []
       listItems.forEach((elem, index)=>{
-         let id = elem.querySelector('.person-name').getAttribute('data-id')
-         let item = items.find(human=>{
-            return human._id === id
-         })
-         item.order[this.props.filter] = index
-         result.push(item)
+         console.log(elem.order);
+         elem.order[this.props.filter] = index
+         result.push(elem)
       })
 
       //setting up fields
       let reqData = new FormData()
       reqData.set('itemType', this.props.pageType.split('-')[1])
-      alert('data is ready to deploy')
-      console.log(result);
       reqData.set('info', JSON.stringify(result))
+
+      console.log(result[0]);
 
       // forming request string
       let reqUrl = '';
@@ -136,23 +152,7 @@ class SortList extends Component {
             </li>
          )
       })
-      // items.forEach((human, index)=>{
-      //    const listItem = document.createElement('li');
- 
-      //    listItem.setAttribute('data-index', index);
-   
-      //    listItem.innerHTML = `
-      //      <span class="number">${index + 1}</span>
-      //      <div class="draggable" draggable="true">
-      //        <p class="person-name" data-id='${human._id}'>${human.name}</p>
-      //        <i class="fas fa-grip-lines"></i>
-      //      </div>
-      //    `;
-   
-      //    listItems.push(listItem);
-      //    this.rootElem.current.appendChild(listItem);
-      // })
-      // addEventListeners(this.rootElem.current)
+
       return (
          <>
          <ul class="draggable-list" id="draggable-list" ref={this.rootElem}>{listItems}</ul>
