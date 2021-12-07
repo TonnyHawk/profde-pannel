@@ -34,6 +34,7 @@ class Expanded extends Component {
             id: human._id || null,
             role: human.role || 'student',
             certificates: human.certificates || [],
+            order: human.order || {},
             required: ['name', 'about']
          }
       }else if(pageType === 'certificates'){
@@ -246,7 +247,8 @@ class Expanded extends Component {
                professor: this.state.professor,
                id: this.state.id,
                role: this.state.role,
-               certificates
+               certificates,
+               order: this.state.order,
             }
 
          } else if(pageType === 'certificates'){
