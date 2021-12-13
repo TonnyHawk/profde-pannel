@@ -3,6 +3,7 @@ import CertificatesBody from './bodies/certificates';
 import HumansBody from './bodies/humans';
 import BooksBody from './bodies/books';
 import CoursesBody from './bodies/courses';
+import GalleryBody from './bodies/gallery';
 import serverUrl from '../../globals';
 
 
@@ -35,6 +36,15 @@ class Expanded extends Component {
             role: human.role || 'student',
             certificates: human.certificates || [],
             order: human.order || {},
+            required: ['name', 'about']
+         }
+      }else if(pageType === 'gallery'){
+         state = {
+            name: human.name || '',
+            about: human.about || '',
+            media: human.media || {link: '', type: ''},
+            professor: human.professor || ['Deutsch'],
+            id: human._id || null,
             required: ['name', 'about']
          }
       }else if(pageType === 'certificates'){
@@ -271,6 +281,14 @@ class Expanded extends Component {
                about: this.state.about,
                id: this.state.id
             }
+         }else if(pageType === 'gallery'){
+            human = {
+               name: this.state.name,
+               professor: this.state.professor,
+               about: this.state.about,
+               id: this.state.id,
+               media: this.state.media
+            }
          } else if(pageType === 'courses'){
             human = {
                name: this.state.name,
@@ -285,10 +303,7 @@ class Expanded extends Component {
             console.log(formInfo);
          }
 
-         reqData.set('itemType', this.props.pageType)
-         alert('data is ready to deploy')
-         console.log(human);
-         reqData.set('info', JSON.stringify(human))
+         reqData.set('info', '')
 
          if(pageType === 'humans'){
             // media files
@@ -316,8 +331,22 @@ class Expanded extends Component {
                reqData.set('photo', photo, 'avatar')
             }
          }catch{
-            console.log('no photo existed in this form');
+            console.log('no photo file existed in this form');
          }
+
+         if(pageType === 'gallery'){
+            if(formInfo.get('media').size > 0){
+               let mediaFile = formInfo.get('media') 
+               reqData.set('media', mediaFile, 'media-file')
+               let type = mediaFile.type.split('/')[0]
+               human.media = {link: '', type}
+            }
+         }
+
+         console.log(human);
+
+         reqData.set('itemType', this.props.pageType)
+         reqData.set('info', JSON.stringify(human))
 
          // forming request string
          let reqUrl = '';
@@ -355,6 +384,8 @@ class Expanded extends Component {
          return <BooksBody state={this.state} props={this.props} funcs={this}/>
       }else if(pageType === 'courses'){
          return <CoursesBody state={this.state} props={this.props} funcs={this}/>
+      }else if(pageType === 'gallery'){
+         return <GalleryBody state={this.state} props={this.props} funcs={this}/>
       }
    }
 }

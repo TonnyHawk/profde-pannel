@@ -31,8 +31,8 @@ class App extends Component {
          },
          // all, Deutsch, English
          filter: 'all',
-         // available pages: humans, certificates, books, courses
-         currentPage: 'humans',
+         // available pages: humans, certificates, books, courses, gallery
+         currentPage: 'gallery',
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()
@@ -135,59 +135,32 @@ class App extends Component {
       })
    }
 
-   // sendData(){
-   //    let {items} = this.props
-   //    let result = []
-   //    listItems.forEach((elem, index)=>{
-   //       let id = elem.querySelector('.person-name').getAttribute('data-id')
-   //       let item = items.find(human=>{
-   //          return human._id === id
-   //       })
-   //       item.order[this.props.filter] = index
-   //       result.push(item)
-   //    })
-   //    console.log(result);
-
-   //    //setting up fields
-   //    reqData.set('itemType', this.props.pageType)
-   //    alert('data is ready to deploy')
-   //    console.log(human);
-   //    reqData.set('info', JSON.stringify(human))
-
-   //    // forming request string
-   //    let reqUrl = '';
-   //    let option = ''
-   //    let serverFunct = 'dbItem';
-   //    if(this.props.info.mode === 'edit') option = '/edit'
-   //    else if(this.props.info.mode === 'add') {option = '/add';}
-   //    // reqUrl = serverUrl + pageType + option
-   //    reqUrl = serverUrl + serverFunct + option
-
-   //    this.props.funcs.setUpLoader(true, 'Зберігаємо данні')
-
-   //    let response = await fetch(reqUrl, {
-   //       method: 'POST',
-   //       headers: {
-   //          encType: 'multipart/form-data'
-   //          },
-   //       body: reqData
-   //       });
-   
-   //       let result = await response.text();
-   //       this.props.funcs.setUpLoader(false)
-   //       console.log(result);
-   // }
-
 
    render() {
       let {search, items, selectedItem, expandedPage, currentPage} = this.state
 
       items = this.nameFilter(search, items)
       items = items.map((human, ind)=>{
+         let mediaThing = ''
+         if(typeof human.media === 'undefined'){
+            mediaThing = (<img src={human.photo} alt="" class="gall-item__img" />)
+         }else{
+            if(human.media.type === 'video'){
+               mediaThing = (
+                  <video class="gall-item__img" preload="metadata">
+                     <source src={human.media.link} type="video/mp4"/>
+                     Your browser does not support the video tag.
+                  </video>
+               )
+            }else if(human.media.type === 'image'){
+               mediaThing = (<img src={human.media.link} alt="" class="gall-item__img" />)
+            }
+         }
+
          return (
             <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
                <div class="gall-item__photo">
-                  <img src={human.photo} alt="" class="gall-item__img" />
+                  {mediaThing}
                </div>
                <p class="gall-item__title">{human.name}</p>
                {/* <p class="gall-item__descr">Анна Богуцька</p> */}
@@ -222,6 +195,9 @@ class App extends Component {
             break;
          case 'courses':
             title = 'Курси';
+            break;
+         case 'gallery':
+            title = 'Галерея';
             break;
          default:
             title = 'Впорядкування';
@@ -259,6 +235,7 @@ class App extends Component {
                         <a onClick={()=>this.changePage('certificates')}><li>Сертифікати</li></a>
                         <a onClick={()=>this.changePage('books')}><li>Книги</li></a>
                         <a onClick={()=>this.changePage('courses')}><li>Курси</li></a>
+                        <a onClick={()=>this.changePage('gallery')}><li>Галерея</li></a>
                      </ul>
                   </div>
                </nav>
