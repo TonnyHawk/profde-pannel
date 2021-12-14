@@ -45,7 +45,7 @@ class Expanded extends Component {
             media: human.media || {link: '', type: ''},
             professor: human.professor || ['Deutsch'],
             id: human._id || null,
-            required: ['name', 'about']
+            required: []
          }
       }else if(pageType === 'certificates'){
          state = {
