@@ -19,7 +19,9 @@
 {
   text-decoration: none;
   color: #232323;
-  
+  width: max-content;
+  display: block;
+
   transition: color 0.3s ease;
 }
 
@@ -136,6 +138,7 @@
 {
   padding: 10px 0;
   font-size: 22px;
+  cursor: pointer;
 }
 
 /*

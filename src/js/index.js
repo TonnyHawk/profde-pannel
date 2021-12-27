@@ -36,6 +36,7 @@ class App extends Component {
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()
+      this.menuBtn = React.createRef()
    }
 
    setUpLoader(display, message=''){
@@ -106,6 +107,7 @@ class App extends Component {
    changePage(name){
       console.log('changing a page to '+name);
       this.setState({currentPage: name}, ()=>this.loadItems())
+      this.menuBtn.current.checked = false;
    }
 
    addItem(){
@@ -214,7 +216,7 @@ class App extends Component {
                      A fake / hidden checkbox is used as click reciever,
                      so you can use the :checked selector on it.
                      --> */}
-                     <input type="checkbox" />
+                     <input type="checkbox" ref={this.menuBtn}/>
                      
                      {/* <!--
                      Some spans to act as a hamburger.
