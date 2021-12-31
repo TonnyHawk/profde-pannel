@@ -139,7 +139,7 @@ export default function HumansBody(properties){
 
             return (
             <div className="row certificates-elem my-3">
-               <div className="col-12 mb-3">
+               <div className="col-12">
                   <img src={funcs.state.certificates[index].photo} alt="" />
                </div>
                <div className="row">
@@ -177,6 +177,12 @@ export default function HumansBody(properties){
             fontSize: '4rem',
             cursor: 'pointer'
          }
+
+         let photoPicture = '';
+         if(photo !== ''){
+            photoPicture = (
+               <img src={photo} width={'100%'} alt="" className='mb-3' />
+         )}
          return (
             <div style={style}>
                <div class="container" ref={c=>funcs.rootElem = c}>
@@ -200,18 +206,11 @@ export default function HumansBody(properties){
                                  <option value="student">Учень</option>
                               </select>
                            </div>
-                           <div className="row">
-                              <div className="col-12 col-md-6">
-                                 <img src={photo} height={100} alt="" />
-                              </div>
-                              <div className="col-12 col-md-6">
-                                 {/* {video} */}
-                              </div>
-                           </div>
-                           <div class="row">
+                           <div class="row mb-5">
                               <div class="col-12 col-md-6">
                                  <div class="mb-4">
-                                    <label htmlFor="photo" class="form-label">Фото</label>
+                                    <label htmlFor="photo" class="form-label">Фото</label><br/>
+                                    {photoPicture}
                                     <input class="form-control" type="file" id="photo" name='photo'/>
                                  </div>
                               </div>
@@ -233,12 +232,12 @@ export default function HumansBody(properties){
                               <div class="btn btn-success" onClick={()=>funcs.addField('professor', 2)}>Додати Школу</div>
                            </div>
                            <div class="mb-3 mt-5">
-                              <h4 class="mt-5 mb-4">Рівень володіння мовою</h4>
+                              <label class="form-label mb-0">Рівень володіння мовою</label><br/>
                               {langLevelElement}
                               <div class="btn btn-success" onClick={()=>funcs.addField('languages', 2)}>Додати Мову</div>
                            </div>
                            <div class="mb-3 mt-5">
-                              <h4 class="mt-5 mb-4">Сертифікати</h4>
+                              <label class="form-label">Сертифікати</label><br/>
                               {certificatesElem}
                               <div class="btn btn-success" onClick={()=>funcs.addField('certificates')}>Додати Сертифікат</div>
                            </div>

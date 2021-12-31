@@ -41,6 +41,12 @@ export default function CertificatesBody(properties){
       fontSize: '4rem',
       cursor: 'pointer'
    }
+
+   let photoPicture = '';
+   if(photo !== ''){
+      photoPicture = (
+         <img src={photo} width={'100%'} alt="" className='mb-3' />
+   )}
    return (
       <div style={style}>
          <div class="container" ref={c=>funcs.rootElem = c}>
@@ -61,15 +67,11 @@ export default function CertificatesBody(properties){
                         <label htmlFor="name" class="form-label">Власник</label>
                         <input type="text" class="form-control" id="owner" name='owner' placeholder="" required value={owner} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
-                     <div className="row">
-                        <div className="col-12 col-md-6">
-                           <img src={photo} height={100} alt="" />
-                        </div>
-                     </div>
                      <div class="row">
                         <div class="col-12 col-md-6">
                            <div class="mb-4">
-                              <label htmlFor="photo" class="form-label">Фото</label>
+                              <label htmlFor="photo" class="form-label">Фото</label><br/>
+                              {photoPicture}
                               <input class="form-control" type="file" id="photo" name='photo'/>
                            </div>
                         </div>

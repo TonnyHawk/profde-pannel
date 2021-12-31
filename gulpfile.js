@@ -17,3 +17,4 @@ function watchCss(){
 }
 
 exports.default = series(css, watchCss)
+exports.css = css

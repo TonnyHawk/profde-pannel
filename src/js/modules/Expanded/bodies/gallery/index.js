@@ -31,11 +31,11 @@ export default function GalleryBody(properties){
          let mediaElement = '';
          switch(media.type){
             case 'image':
-               mediaElement = (<img src={media.link} height={100} alt="" />)
+               mediaElement = (<img src={media.link} className='mb-3' width={'100%'} alt="" />)
                break;
             case 'video':
                mediaElement = (
-                  <video width="320" height="240" controls preload="metadata">
+                  <video width={'100%'} className='mb-3' controls preload="metadata">
                      <source src={media.link} type="video/mp4"/>
                      Your browser does not support the video tag.
                   </video>
@@ -73,15 +73,11 @@ export default function GalleryBody(properties){
                               <label htmlFor="name" class="form-label">Ім'я</label>
                               <input type="text" class="form-control" id="name" name='name' placeholder="" required value={name} onChange={(e)=>funcs.handleChange(e)}/>
                            </div>
-                           <div className="row">
-                              <div className="col-12 col-md-6">
-                                 {mediaElement}
-                              </div>
-                           </div>
                            <div class="row">
                               <div class="col-12 col-md-6">
                                  <div class="mb-4">
-                                    <label htmlFor="photo" class="form-label">Медіафайл</label>
+                                    <label htmlFor="photo" class="form-label">Медіафайл</label><br/>
+                                    {mediaElement}
                                     <input class="form-control" type="file" id="media" name='media'/>
                                  </div>
                               </div>

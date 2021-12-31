@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Expanded from './modules/Expanded';
 import ReactDOM from 'react-dom';
-import Loader from './components/Loader'
+import Loader from './components/Loader';
 import serverUrl from './globals';
-import SortList from './components/SortList'
+import SortList from './components/SortList';
+import 'lazysizes';
 
 import './style.css';
 
@@ -155,7 +156,7 @@ class App extends Component {
                   </video>
                )
             }else if(human.media.type === 'image'){
-               mediaThing = (<img src={human.media.link} alt="" class="gall-item__img" />)
+               mediaThing = (<img src={human.media.link+"/min"} alt="" class="gall-item__img lazyload" data-src={human.media.link}/>)
             }
          }
 
