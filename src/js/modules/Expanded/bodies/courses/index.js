@@ -3,13 +3,12 @@ import SemanticDropdown from '../../../../components/SemanticDropdown'
 
 export default function CoursesBody(properties){
    let {state, props, funcs} = properties
-   let {name, themes, professor, about} = state
-   let index = 0;
+   let {name, themes, professor, about, features} = state
    // creating professor element
-   let professorElem = professor.map(elem=>{
-      let content = (
+   let professorElem = professor.map((elem, index)=>{
+      return(
       <div class="row professor-elem mb-3" data-name='professor'>
-         <div class="col-11">
+         <div class="col">
             <select class="form-select" aria-label="select example" id="professor" 
             name='professor'
             data-index={index}
@@ -19,15 +18,38 @@ export default function CoursesBody(properties){
                <option value="English">English</option>
             </select>
          </div>
-         <div className="col-1">
+         <div className="col-auto">
             <div className="btn btn-danger"
             data-name='professor'
             data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
          </div>
       </div>
       )
-      index++;
-      return content
+   })
+
+   let featuresElem = features.map((elem, index)=>{
+      return (<div className="row mb-3">
+         <div className="col-auto d-flex align-items-center align-items-md-end justify-content-start">
+            <p>{index+1}.</p>
+         </div>
+         <div className="col">
+            <div className="row">
+               <div className="col-12 col-md-6 mb-3 mb-md-0">
+                  <label class="form-sublabel">Значок (картинка)</label>
+                  <input type="file" class="form-control" name={`feature-${index}`} required onChange={(e)=>funcs.handleChange(e)}/>
+               </div>
+               <div className="col-12 col-md-6">
+                  <label class="form-sublabel">Текст</label>
+                  <input type="text" data-index={index} class="form-control" data-name='features' name='text' placeholder="" required value={elem.text} onChange={(e)=>funcs.handleChange(e)}/>
+               </div>
+            </div>
+         </div>
+         <div className="col-auto d-flex align-items-center align-items-md-end justify-content-end">
+            <div className="btn btn-danger"
+               data-name='features'
+               data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
+         </div>
+      </div>)
    })
 
    let style = {
@@ -67,6 +89,11 @@ export default function CoursesBody(properties){
                         <label class="form-label">Про Курс</label>
                         <textarea rows='10' type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
+                     <div className="mb-4">
+                        <label class="form-label">Короткі особливості курсу</label><br/>
+                        {featuresElem}
+                        <div class="btn btn-success" onClick={()=>funcs.addField('features')}>Додати особливість</div>
+                     </div>
                      <div class="mb-4">
                         <label class="form-label">Теми усного мовлення</label>
                         <textarea rows='10' type="text" class="form-control" data-name='themes' name='content' data-index={0} placeholder="" required value={themes[0].content} onChange={(e)=>funcs.handleChange(e)}/>
@@ -86,7 +113,7 @@ export default function CoursesBody(properties){
                <div class="col d-flex justify-content-end">
                   <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
                   <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Додати</div>
-                  <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.showInfo()}>Get Info</div>
+                  <div class="btn btn-success my-5" id="get" onClick={()=>funcs.showInfo('')}>Get Info</div>
                </div>
             </div>
          </div>

@@ -248,7 +248,7 @@ export default function HumansBody(properties){
                      <div class="col d-flex justify-content-end">
                         <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
                         <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Зберегти</div>
-                        <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.addField('')}>Get Info</div>
+                        <div class="btn btn-success d-none my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
                      </div>
                   </div>
                </div>

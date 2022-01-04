@@ -33,7 +33,7 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses, gallery
-         currentPage: 'gallery',
+         currentPage: 'courses',
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()

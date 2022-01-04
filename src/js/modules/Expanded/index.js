@@ -74,6 +74,7 @@ class Expanded extends Component {
             themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
             id: human._id || null,
             books: human.books || [],
+            features: [{text:'', photo: ''}],
             required: ['name', 'about', 'professor']
          }
       }
@@ -84,7 +85,7 @@ class Expanded extends Component {
    handleChange(e){
       let key = e.target.name
       let value = e.target.value
-      if(e.target.getAttribute('data-index')){ // meens that we process select
+      if(e.target.getAttribute('data-index')){ // meens that we deal with an array
          let index = e.target.getAttribute('data-index')
          let name = e.target.name
          if(e.target.getAttribute('data-name')){ // if we need to change select pair
@@ -107,6 +108,7 @@ class Expanded extends Component {
          })
       }
    }
+
 
    handleDropDownSelect = (e, data=null, binding=null) => {
       binding.setState({books: data.value})
@@ -135,6 +137,9 @@ class Expanded extends Component {
          case 'video':
             template = {link: '', professor: 'Deutsch'};
             break;
+         case 'features':
+            template = {text: '', photo: ''};
+            break;
          default:
             errors = 'function addField is not correct fulfield'
       }
@@ -162,7 +167,7 @@ class Expanded extends Component {
       let key = e.target.getAttribute('data-name');
       let index = e.target.getAttribute('data-index')
       let minNumOfElements = 1
-      if(key === 'certificates' || key === 'video') minNumOfElements = 0
+      if(key === 'certificates' || key === 'video' || key === 'features') minNumOfElements = 0
       this.setState(state=>{
          if(state[key].length > minNumOfElements){
             state[key] = state[key].filter(elem=>{
@@ -193,7 +198,7 @@ class Expanded extends Component {
    }
 
    showInfo(){
-      console.log(this.state)
+      console.log(this.state.features)
    }
 
    async delStudent(){
@@ -220,7 +225,6 @@ class Expanded extends Component {
        this.props.funcs.deselectHuman()
    }
 
-
    async sendData(){
       let validation = this.validate()
       if(!validation.access){
@@ -242,7 +246,6 @@ class Expanded extends Component {
                let photo = formInfo.get(`cert-${elem.professor}-`+index)
                if(photo.size > 0){
                   elem.photo = photo;
-                  // reqData.set(`certificates/${elem.professor}/cert-photo-`+index, photo, 'cert-'+index+'.jpg')
                }
                return elem
             })
@@ -290,17 +293,28 @@ class Expanded extends Component {
                media: this.state.media
             }
          } else if(pageType === 'courses'){
+
+            let features = this.state.features;
+            features = features.map((elem, index)=>{
+               // в якийх є файли з тих залить
+               let photo = formInfo.get(`feature-${index}`)
+               if(photo.size > 0){
+                  elem.photo = photo;
+               }
+               return elem
+            })
+
             human = {
                name: this.state.name,
                about: this.state.about,
                professor: this.state.professor,
-               features: this.state.features,
+               features,
                themes: this.state.themes,
                books: this.state.books,
                id: this.state.id
             }
 
-            console.log(formInfo);
+            console.log(human.features);
          }
 
          reqData.set('info', '')
@@ -371,7 +385,7 @@ class Expanded extends Component {
           this.props.funcs.setUpLoader(false)
           console.log(result);
 
-          this.props.funcs.deselectHuman()
+         //  this.props.funcs.deselectHuman()
       }
    }
    render() {
