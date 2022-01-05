@@ -261,26 +261,40 @@ class App extends Component {
             <div class="page__bd">
                <div class='gall gall--books'>
                   <div class="gall__inner">
-                     <div class="gall__hd">
-                        <div class="gall__filters">
-                        <p class={`gall__filter ${this.state.filter === 'all' ? 'is-active' : ''} bg-active-main`} onClick={()=>this.toggleFilter('all')}>Всі</p>
-                        <p class={`gall__filter ${this.state.filter === 'Deutsch' ? 'is-active' : ''} bg-active-deu`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</p>
-                        <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
-                     </div>
-                     <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
-                     <div className="btn btn-primary btn-lg" onClick={()=>{
-                           let pageName = '';
-                           if(currentPage.split('-')[0] === 'sort') pageName = currentPage
-                           else{pageName = `sort-${currentPage}`}
-                           this.changePage(pageName)
-                        }}>Sort</div>
-                     <div class="input-group gall__search">
-                        <div class="input-group-append">
-                          <span class="input-group-text" id="basic-addon1">@</span>
+
+                     <div className="row gall__hd">
+                        <div className="col-12 col-md-6">
+                           <div class="gall__filters">
+                              <p class={`gall__filter ${this.state.filter === 'all' ? 'is-active' : ''} bg-active-main`} onClick={()=>this.toggleFilter('all')}>Всі</p>
+                              <p class={`gall__filter ${this.state.filter === 'Deutsch' ? 'is-active' : ''} bg-active-deu`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</p>
+                              <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
+                           </div>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value={search} onChange={(e)=>this.handleChange(e)}/>
-                      </div>
+                        <div className="col-12 col-md-6">
+                           <div className="row gall__search justify-content-end">
+                              <div className="col-12 mb-3">
+                                 <div class="input-group">
+                                    <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value={search} onChange={(e)=>this.handleChange(e)}/>
+                                 </div>
+                              </div>
+                              <div className="col-auto">
+                                 <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>Додати <i class="bi bi-plus-square"></i></div>
+                              </div>
+                              <div className="col-auto">
+                                 <div className={`btn btn-warning btn-lg`} onClick={()=>{
+                                    let pageName = '';
+                                    if(currentPage.split('-')[0] === 'sort') pageName = currentPage
+                                    else{pageName = `sort-${currentPage}`}
+                                    this.changePage(pageName)
+                                 }}>Сортувати <i class={`bi ${currentPage.split('-')[0] === 'sort' ? 'bi-funnel-fill' : 'bi-funnel'}`}></i></div>
+                              </div>
+                           </div>
+                        </div>
                      </div>
+
                      {content}
                   </div>
                </div>

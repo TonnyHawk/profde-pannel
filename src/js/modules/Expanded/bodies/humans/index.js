@@ -24,18 +24,23 @@ export default function HumansBody(properties){
 
             let prof = (
                <div class="row professor-elem mb-3" data-name='video'>
-                  <div class="col-11">
-                     <select class="form-select" aria-label="select example" id="professor" 
-                     name='professor'
-                     data-index={index}
-                     data-name={'video'}
-                     value={elem.professor}
-                     onChange={(e)=>funcs.handleChange(e)}>
-                        <option value='Deutsch'>Deutsch</option>
-                        <option value="English">English</option>
-                     </select>
+                  <div className="col">
+                     <div className="row">
+                        <div className="col-12"><input class="form-control mb-3" type="file" name={'video-'+elem.professor} accept="image/png, image/jpeg, video/mp4"/></div>
+                        <div class="col-12">
+                           <select class="form-select" aria-label="select example" id="professor" 
+                           name='professor'
+                           data-index={index}
+                           data-name={'video'}
+                           value={elem.professor}
+                           onChange={(e)=>funcs.handleChange(e)}>
+                              <option value='Deutsch'>Deutsch</option>
+                              <option value="English">English</option>
+                           </select>
+                        </div>
+                     </div>
                   </div>
-                  <div className="col-1">
+                  <div className="col-auto d-flex align-items-center justify-content-end">
                      <div className="btn btn-danger"
                      data-name='video'
                      data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
@@ -46,7 +51,6 @@ export default function HumansBody(properties){
             return (
                <>
                   {video}
-                  <input class="form-control mb-3" type="file" name={'video-'+elem.professor} accept="image/png, image/jpeg, video/mp4"/>
                   {prof}
                </>
             )
@@ -56,7 +60,7 @@ export default function HumansBody(properties){
          let professorElem = professor.map((elem, index)=>{
             let content = (
             <div class="row professor-elem mb-3" data-name='professor'>
-               <div class="col-11">
+               <div class="col">
                   <select class="form-select" aria-label="select example" id="professor" 
                   name='professor'
                   data-index={index}
@@ -66,7 +70,7 @@ export default function HumansBody(properties){
                      <option value="English">English</option>
                   </select>
                </div>
-               <div className="col-1">
+               <div className="col-auto d-flex align-items-center align-items-md-end justify-content-end">
                   <div className="btn btn-danger"
                   data-name='professor'
                   data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
@@ -110,7 +114,7 @@ export default function HumansBody(properties){
                <div class="col">
                   {langLvl}
                </div>
-               <div className="col-1">
+               <div className="col-auto d-flex align-items-center align-items-md-end justify-content-end">
                   <div className="btn btn-danger"
                   data-name='languages'
                   data-index={index-1} onClick={(e)=>funcs.deleteField(e)}>x</div>
@@ -122,19 +126,15 @@ export default function HumansBody(properties){
          let certificatesElem = certificates.map((elem, index)=>{
 
             let prof = (
-               <div class="row professor-elem mt-3" data-name='professor'>
-                  <div class="col-11">
-                     <select class="form-select" aria-label="select example" id="professor" 
-                     name='professor'
-                     data-index={index}
-                     data-name='certificates'
-                     value={elem.professor}
-                     onChange={(e)=>funcs.handleChange(e)}>
-                        <option value='Deutsch'>Deutsch</option>
-                        <option value="English">English</option>
-                     </select>
-                  </div>
-               </div>
+               <select class="form-select" aria-label="select example" id="professor" 
+               name='professor'
+               data-index={index}
+               data-name='certificates'
+               value={elem.professor}
+               onChange={(e)=>funcs.handleChange(e)}>
+                  <option value='Deutsch'>Deutsch</option>
+                  <option value="English">English</option>
+               </select>
             )
 
             return (
@@ -144,20 +144,22 @@ export default function HumansBody(properties){
                </div>
                <div className="row">
                   <div className="col">
-                     <input type="text" class="form-control" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={funcs.state.certificates[index].name} onChange={(e)=>funcs.handleChange(e)}/>
+                     <div className="row">
+                        <div className="col-12 col-md">
+                           <input type="text" class="form-control" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={funcs.state.certificates[index].name} onChange={(e)=>funcs.handleChange(e)}/>
+                        </div>
+                        <div className="col-12 col-md mt-3 mt-md-0">
+                           <input class="form-control" type="file" name={`cert-${elem.professor}-`+index} accept="image/png, image/jpeg"/>
+                        </div>
+                        <div className="col-12 mt-3">
+                           {prof}
+                        </div>
+                     </div>
                   </div>
-                  <div className="col">
-                     <input class="form-control" type="file" name={`cert-${elem.professor}-`+index} accept="image/png, image/jpeg"/>
-                  </div>
-                  <div className="col-1">
+                  <div className="col-auto d-flex align-items-center justify-content-end">
                      <div className="btn btn-danger"
                      data-name='certificates'
                      data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
-                  </div>
-               </div>
-               <div className="row">
-                  <div className="col">
-                     {prof}
                   </div>
                </div>
             </div>
@@ -244,11 +246,15 @@ export default function HumansBody(properties){
                         </form>
                      </div>
                   </div>
-                  <div class="row">
-                     <div class="col d-flex justify-content-end">
-                        <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
-                        <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Зберегти</div>
-                        <div class="btn btn-success d-none my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
+                  <div class="row justify-content-end">
+                     <div class="col-6 col-md-auto">
+                        <div class="btn btn-danger btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.delStudent()}>Видалити <i class="bi bi-trash"></i></div>
+                     </div>
+                     <div className="col-6 col-md-auto">
+                        <div class="btn btn-primary btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.sendData()}>Зберегти <i class="bi bi-check-square"></i></div>
+                     </div>
+                     <div className="col d-none ">
+                        <div class="btn btn-success my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
                      </div>
                   </div>
                </div>

@@ -8,7 +8,7 @@ export default function GalleryBody(properties){
          let professorElem = professor.map((elem, index)=>{
             let content = (
             <div class="row professor-elem mb-3" data-name='professor'>
-               <div class="col-11">
+               <div class="col">
                   <select class="form-select" aria-label="select example" id="professor" 
                   name='professor'
                   data-index={index}
@@ -18,7 +18,7 @@ export default function GalleryBody(properties){
                      <option value="English">English</option>
                   </select>
                </div>
-               <div className="col-1">
+               <div className="col-auto d-flex align-items-center align-items-md-end justify-content-end">
                   <div className="btn btn-danger"
                   data-name='professor'
                   data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
@@ -94,11 +94,15 @@ export default function GalleryBody(properties){
                         </form>
                      </div>
                   </div>
-                  <div class="row">
-                     <div class="col d-flex justify-content-end">
-                        <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
-                        <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Зберегти</div>
-                        <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.addField('')}>Get Info</div>
+                  <div class="row justify-content-end">
+                     <div class="col-6 col-md-auto">
+                        <div class="btn btn-danger btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.delStudent()}>Видалити <i class="bi bi-trash"></i></div>
+                     </div>
+                     <div className="col-6 col-md-auto">
+                        <div class="btn btn-primary btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.sendData()}>Зберегти <i class="bi bi-check-square"></i></div>
+                     </div>
+                     <div className="col d-none ">
+                        <div class="btn btn-success my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
                      </div>
                   </div>
                </div>
