@@ -22,3 +22,10 @@ export function sortArr(arr, filter){ // sorting arr items by 'order' property a
 
    return newArr
 }
+
+export const toBase64 = file => new Promise((resolve, reject) => {
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   reader.onload = () => resolve(reader.result);
+   reader.onerror = error => reject(error);
+});

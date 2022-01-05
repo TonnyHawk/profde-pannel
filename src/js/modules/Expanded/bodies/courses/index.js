@@ -28,7 +28,12 @@ export default function CoursesBody(properties){
    })
 
    let featuresElem = features.map((elem, index)=>{
-      return (<div className="row mb-3">
+      let image = '';
+      if(elem.photo !== '') image = <img src={elem.photo} className='mb-3' alt="" />
+      return (
+         <>
+         {image}
+      <div className="row mb-3">
          <div className="col-auto d-flex align-items-center align-items-md-end justify-content-start">
             <p>{index+1}.</p>
          </div>
@@ -49,7 +54,8 @@ export default function CoursesBody(properties){
                data-name='features'
                data-index={index} onClick={(e)=>funcs.deleteField(e)}>x</div>
          </div>
-      </div>)
+      </div>
+      </>)
    })
 
    let style = {
@@ -90,7 +96,7 @@ export default function CoursesBody(properties){
                         <textarea rows='10' type="text" class="form-control" id="about" name='about' placeholder="" required value={about} onChange={(e)=>funcs.handleChange(e)}/>
                      </div>
                      <div className="mb-4">
-                        <label class="form-label">Короткі особливості курсу</label><br/>
+                        <label class="form-label">Короткі деталі курсу</label><br/>
                         {featuresElem}
                         <div class="btn btn-success" onClick={()=>funcs.addField('features')}>Додати особливість</div>
                      </div>

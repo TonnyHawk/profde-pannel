@@ -5,6 +5,7 @@ import BooksBody from './bodies/books';
 import CoursesBody from './bodies/courses';
 import GalleryBody from './bodies/gallery';
 import serverUrl from '../../globals';
+import {toBase64} from '../../functions';
 
 
 function strCapitalize(str){
@@ -74,7 +75,7 @@ class Expanded extends Component {
             themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
             id: human._id || null,
             books: human.books || [],
-            features: [{text:'', photo: ''}],
+            features: human.features || [{text:'', photo: ''}],
             required: ['name', 'about', 'professor']
          }
       }
@@ -295,14 +296,14 @@ class Expanded extends Component {
          } else if(pageType === 'courses'){
 
             let features = this.state.features;
-            features = features.map((elem, index)=>{
+            features = await Promise.all(features.map(async (elem, index)=>{
                // в якийх є файли з тих залить
                let photo = formInfo.get(`feature-${index}`)
                if(photo.size > 0){
-                  elem.photo = photo;
+                  await toBase64(photo).then(res=>elem.photo=res);
                }
                return elem
-            })
+            }))
 
             human = {
                name: this.state.name,
@@ -357,7 +358,7 @@ class Expanded extends Component {
             }
          }
 
-         console.log(human);
+         console.log(human.features);
 
          reqData.set('itemType', this.props.pageType)
          reqData.set('info', JSON.stringify(human))
@@ -385,7 +386,7 @@ class Expanded extends Component {
           this.props.funcs.setUpLoader(false)
           console.log(result);
 
-         //  this.props.funcs.deselectHuman()
+          this.props.funcs.deselectHuman()
       }
    }
    render() {
