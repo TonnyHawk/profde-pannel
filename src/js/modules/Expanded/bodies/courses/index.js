@@ -41,7 +41,7 @@ export default function CoursesBody(properties){
             <div className="row">
                <div className="col-12 col-md-6 mb-3 mb-md-0">
                   <label class="form-sublabel">Значок (картинка)</label>
-                  <input type="file" class="form-control" name={`feature-${index}`} required onChange={(e)=>funcs.handleChange(e)}/>
+                  <input type="file" class="form-control" name={`feature-${index}`} required onChange={(e)=>funcs.handleChange(e)} accept="image/png, image/jpeg, image/svg"/>
                </div>
                <div className="col-12 col-md-6">
                   <label class="form-sublabel">Текст</label>

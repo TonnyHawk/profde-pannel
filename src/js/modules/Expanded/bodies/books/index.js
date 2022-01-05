@@ -68,7 +68,7 @@ export default function CertificatesBody(properties){
                            <div class="mb-4">
                               <label htmlFor="photo" class="form-label">Фото</label><br/>
                               {photoPicture}
-                              <input class="form-control" type="file" id="photo" name='photo'/>
+                              <input class="form-control" type="file" id="photo" name='photo' accept="image/png, image/jpeg"/>
                            </div>
                         </div>
                      </div>

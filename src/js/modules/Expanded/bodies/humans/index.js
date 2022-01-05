@@ -46,7 +46,7 @@ export default function HumansBody(properties){
             return (
                <>
                   {video}
-                  <input class="form-control mb-3" type="file" name={'video-'+elem.professor}/>
+                  <input class="form-control mb-3" type="file" name={'video-'+elem.professor} accept="image/png, image/jpeg, video/mp4"/>
                   {prof}
                </>
             )
@@ -147,7 +147,7 @@ export default function HumansBody(properties){
                      <input type="text" class="form-control" name='name' data-name='certificates' data-index={index} placeholder="Назва сертифікату" value={funcs.state.certificates[index].name} onChange={(e)=>funcs.handleChange(e)}/>
                   </div>
                   <div className="col">
-                     <input class="form-control" type="file" name={`cert-${elem.professor}-`+index}/>
+                     <input class="form-control" type="file" name={`cert-${elem.professor}-`+index} accept="image/png, image/jpeg"/>
                   </div>
                   <div className="col-1">
                      <div className="btn btn-danger"
@@ -211,7 +211,7 @@ export default function HumansBody(properties){
                                  <div class="mb-4">
                                     <label htmlFor="photo" class="form-label">Фото</label><br/>
                                     {photoPicture}
-                                    <input class="form-control" type="file" id="photo" name='photo'/>
+                                    <input class="form-control" type="file" id="photo" name='photo' accept="image/png, image/jpeg"/>
                                  </div>
                               </div>
                               <div class="col-12 col-md-6">

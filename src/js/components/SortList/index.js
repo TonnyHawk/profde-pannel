@@ -144,10 +144,16 @@ class SortList extends Component {
          )
       })
 
+      let submitBtnVisibility = true
+      if(listItems.length === 0){
+         listItems = (<p className='info-text'>Тут ще нічого немає</p>)
+         submitBtnVisibility = false
+      }
+
       return (
          <>
-         <ul class="draggable-list" id="draggable-list" ref={this.rootElem}>{listItems}</ul>
-         <button className="btn btn-primary" onClick={this.sendData}>Зберегти</button>
+            <ul class="draggable-list" id="draggable-list" ref={this.rootElem}>{listItems}</ul>
+            <button className={`btn btn-primary ${submitBtnVisibility ? '' : 'd-none'}`} onClick={this.sendData}>Зберегти</button>
          </>
       );
    }

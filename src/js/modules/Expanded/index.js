@@ -20,6 +20,23 @@ function strCapitalize(str){
    }).join(' ');
 }
 
+function mimeCheck(file, acceptableType){
+   let allowedExtensions = '';
+   switch(acceptableType){
+      case 'image':
+         allowedExtensions = /(\jpg|\jpeg|\png)$/i;
+         break;
+      case 'video':
+         allowedExtensions = /(\mp4)$/i;
+         break;
+      default:
+         allowedExtensions = /(\jpg|\jpeg|\png\mp4)$/i;
+   }
+   if(!allowedExtensions.exec(file.type)) return false
+   else return true
+}
+
+
 class Expanded extends Component {
    constructor(props){
       super(props);
@@ -254,7 +271,7 @@ class Expanded extends Component {
                // в якийх є файли з тих залить
                let photo = formInfo.get(`cert-${elem.professor}-`+index)
                if(photo.size > 0){
-                  elem.photo = photo;
+                  elem.photo = photo
                }
                return elem
             })
@@ -331,8 +348,9 @@ class Expanded extends Component {
          if(pageType === 'humans'){
             // media files
             human.video.forEach(elem=>{
-               if(formInfo.get('video-'+elem.professor).size > 0){ // if we added a new video to the form
-                  let video = formInfo.get('video-'+elem.professor)
+               let file = formInfo.get('video-'+elem.professor);
+               if(file.size > 0){ // if we added a new video to the form
+                  let video = file
                   reqData.set('video-'+elem.professor, video, `video-${elem.professor}.mp4`)
                }
             })
@@ -349,8 +367,9 @@ class Expanded extends Component {
             })
          }
          try{
-            if(formInfo.get('photo').size > 0){ // if we added a new photo to the form
-               let photo = formInfo.get('photo')
+            let file = formInfo.get('photo')
+            if(file.size > 0){ // if we added a new photo to the form
+               let photo = file
                reqData.set('photo', photo, 'avatar')
             }
          }catch{
@@ -358,13 +377,15 @@ class Expanded extends Component {
          }
 
          if(pageType === 'gallery'){
-            if(formInfo.get('media').size > 0){
-               let mediaFile = formInfo.get('media') 
+            let file = formInfo.get('media')
+            if(file.size > 0){
+               let mediaFile = file
                reqData.set('media', mediaFile, 'media-file')
                let type = mediaFile.type.split('/')[0]
                human.media = {link: '', type}
             }
          }
+
 
          console.log(human.features);
 
@@ -386,15 +407,15 @@ class Expanded extends Component {
             method: 'POST',
             headers: {
                encType: 'multipart/form-data'
-             },
+            },
             body: reqData
-          });
+         });
       
-          let result = await response.text();
-          this.props.funcs.setUpLoader(false)
-          console.log(result);
+         let result = await response.text();
+         this.props.funcs.setUpLoader(false)
+         console.log(result);
 
-          this.props.funcs.deselectHuman()
+         this.props.funcs.deselectHuman()
       }
    }
    render() {

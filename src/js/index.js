@@ -34,7 +34,7 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses, gallery
-         currentPage: 'courses',
+         currentPage: 'certificates',
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()
@@ -178,6 +178,9 @@ class App extends Component {
             </div>
          )
       })
+      if(items.length === 0){
+         items[0] = (<p className='info-text'>Тут ще нічого немає</p>)
+      }
 
       let content;
       if(currentPage.split('-')[0] === 'sort'){

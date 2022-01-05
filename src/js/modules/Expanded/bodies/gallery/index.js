@@ -78,7 +78,7 @@ export default function GalleryBody(properties){
                                  <div class="mb-4">
                                     <label htmlFor="photo" class="form-label">Медіафайл</label><br/>
                                     {mediaElement}
-                                    <input class="form-control" type="file" id="media" name='media'/>
+                                    <input class="form-control" type="file" id="media" name='media' accept="image/png, image/jpeg, video/mp4"/>
                                  </div>
                               </div>
                            </div>
