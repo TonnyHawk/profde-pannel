@@ -96,7 +96,6 @@ class SortList extends Component {
       let {listItems} = this.state
       let result = []
       listItems.forEach((elem, index)=>{
-         console.log(elem.order);
          elem.order[this.props.filter] = index
          result.push(elem)
       })

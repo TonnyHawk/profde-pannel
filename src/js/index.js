@@ -52,9 +52,9 @@ class App extends Component {
       let items = [];
       let collection = null;
       switch(this.state.currentPage){
-         case 'sort-humans':
-            collection = 'humans';
-            break;
+         // case 'sort-humans':
+         //    collection = 'humans';
+         //    break;
          default:
             collection = this.state.currentPage;
             break;
@@ -172,10 +172,11 @@ class App extends Component {
       })
 
       let content;
-      if(currentPage === 'sort-humans'){
+      if(currentPage.split('-')[0] === 'sort'){
+
          let data = this.propertyFilter(this.state.items, 'professor', this.state.filter)
          content = <SortList items={data} filter={this.state.filter} pageType={currentPage} funcs={this}/>
-
+         
       }else{
          content = (
             <div class="gall__bd">
@@ -256,7 +257,7 @@ class App extends Component {
                         <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
                      </div>
                      <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
-                     <div className="btn btn-primary btn-lg" onClick={()=>this.changePage('sort-humans')}>Sort</div>
+                     <div className="btn btn-primary btn-lg" onClick={()=>this.changePage(`sort-${currentPage}`)}>Sort</div>
                      <div class="input-group gall__search">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon1">@</span>

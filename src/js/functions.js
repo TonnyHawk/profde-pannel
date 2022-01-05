@@ -3,20 +3,31 @@ export function sortArr(arr, filter){ // sorting arr items by 'order' property a
    let ordered = []
    let unordered = []
 
-   //splitting array on two types to avoid fails with undefined order property later
+   // separating ordered and unordered items
    arr.forEach(elem=>{
-      if(Object.keys(elem).length > 0){
-         ordered.push(elem)
-      }else{
-         unordered.push(elem)
-      }
+         // if(Object.keys(elem).length > 0){
+         if(typeof elem.order !== 'undefined'){
+            ordered.push(elem)
+         }else{
+            unordered.push(elem)
+         }
    })
 
-   newArr = ordered.sort((a, b)=>{
-      if(typeof a.order[filter] !== 'undefined'){
-         return a.order[filter] - b.order[filter]
-      }else return false;
-   })
+   if(ordered.length > 0){
+      // sorting an ordered list
+      newArr = ordered.sort((a, b)=>{
+         if(typeof a.order[filter] !== 'undefined'){
+            return a.order[filter] - b.order[filter]
+         }else return false;
+      })
+   }
+
+   if(unordered.length > 0){
+      unordered = unordered.map(elem=>{
+         elem.order = {}
+         return elem
+      })
+   }
 
    newArr = [...newArr, ...unordered]
 
