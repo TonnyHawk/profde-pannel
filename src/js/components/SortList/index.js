@@ -131,11 +131,13 @@ class SortList extends Component {
    render() {
       let {listItems} = this.state
       listItems = listItems.map((human, index)=>{
+         let descr = ''
+         if(typeof human.owner !== 'undefined') descr = `(${human.owner})`
          return (
             <li data-index={index}>
             <span class="number">{index + 1}</span>
             <div class="draggable" draggable="true">
-               <p class="person-name" data-id={human._id}>{human.name}</p>
+               <p class="person-name" data-id={human._id}>{human.name} <br/>{descr}</p>
                <i class="fas fa-grip-lines"></i>
             </div>
             </li>

@@ -76,7 +76,7 @@ export default function CoursesBody(properties){
             <i class="bi bi-arrow-left" style={closeIconStyle} onClick={()=>props.funcs.deselectHuman()}></i>
             <div class="row">
                <div class="col d-flex justify-content-center">
-                  <h1 class='my-5'>{props.info.mode === 'add' ? 'Додати' : 'Редагувати'}</h1>
+                  <h1 class='my-5'>{props.info.mode === 'add' ? 'Додати' : 'Редагувати'} курс</h1>
                </div>
             </div>
             <div class="row">
@@ -119,7 +119,7 @@ export default function CoursesBody(properties){
                <div class="col d-flex justify-content-end">
                   <div class="btn btn-danger btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.delStudent()}>Видалити</div>
                   <div class="btn btn-primary btn-lg px-5 py-3 my-5 mx-3" id="submit" onClick={()=>funcs.sendData()}>Додати</div>
-                  <div class="btn btn-success my-5" id="get" onClick={()=>funcs.showInfo('')}>Get Info</div>
+                  <div class="btn btn-success my-5 d-none" id="get" onClick={()=>funcs.showInfo('')}>Get Info</div>
                </div>
             </div>
          </div>

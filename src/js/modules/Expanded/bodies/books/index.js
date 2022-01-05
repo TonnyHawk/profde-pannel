@@ -53,7 +53,7 @@ export default function CertificatesBody(properties){
             <i class="bi bi-arrow-left" style={closeIconStyle} onClick={()=>props.funcs.deselectHuman()}></i>
             <div class="row">
                <div class="col d-flex justify-content-center">
-                  <h1 class='my-5'>{props.info.mode === 'add' ? 'Додати' : 'Редагувати'}</h1>
+                  <h1 class='my-5'>{props.info.mode === 'add' ? 'Додати' : 'Редагувати'} підручник</h1>
                </div>
             </div>
             <div class="row">

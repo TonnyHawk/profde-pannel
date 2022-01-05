@@ -5,7 +5,7 @@ import BooksBody from './bodies/books';
 import CoursesBody from './bodies/courses';
 import GalleryBody from './bodies/gallery';
 import serverUrl from '../../globals';
-import {toBase64} from '../../functions';
+import {toBase64, clearPageType} from '../../functions';
 
 
 function strCapitalize(str){
@@ -25,59 +25,67 @@ class Expanded extends Component {
       super(props);
       let {pageType, human} = this.props
       let state = {}
-      if(pageType === 'humans'){
-         state = {
-            name: human.name || '',
-            about: human.about || '',
-            video: human.video || [],
-            photo: human.photo || '',
-            languages: human.languages || [{name: 'Німецька', lvl: 'A1'}],
-            professor: human.professor || ['Deutsch'],
-            id: human._id || null,
-            role: human.role || 'student',
-            certificates: human.certificates || [],
-            order: human.order || {},
-            required: ['name', 'about']
-         }
-      }else if(pageType === 'gallery'){
-         state = {
-            name: human.name || '',
-            about: human.about || '',
-            media: human.media || {link: '', type: ''},
-            professor: human.professor || ['Deutsch'],
-            id: human._id || null,
-            required: []
-         }
-      }else if(pageType === 'certificates'){
-         state = {
-            name: human.name || '',
-            photo: human.photo || '',
-            owner: human.owner || '',
-            professor: human.professor || ['Deutsch'],
-            id: human._id || null,
-            required: ['name', 'owner']
-         }
-      }else if (pageType === 'books'){
-         state = {
-            name: human.name || '',
-            photo: human.photo || '',
-            about: human.about || '',
-            professor: human.professor || ['Deutsch'],
-            id: human._id || null,
-            required: ['name', 'about', 'professor']
-         }
-      }else if(pageType === 'courses'){
-         state = {
-            name: human.name || '',
-            about: human.about || '',
-            professor: human.professor || ['Deutsch'],
-            features: human.features || [],
-            themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
-            id: human._id || null,
-            books: human.books || [],
-            features: human.features || [{text:'', photo: ''}],
-            required: ['name', 'about', 'professor']
-         }
+      let type = clearPageType(pageType)
+
+      switch(type){
+         case 'humans':
+            state = {
+               name: human.name || '',
+               about: human.about || '',
+               video: human.video || [],
+               photo: human.photo || '',
+               languages: human.languages || [{name: 'Німецька', lvl: 'A1'}],
+               professor: human.professor || ['Deutsch'],
+               id: human._id || null,
+               role: human.role || 'student',
+               certificates: human.certificates || [],
+               order: human.order || {},
+               required: ['name', 'about']
+            }
+            break;
+         case 'gallery':
+            state = {
+               name: human.name || '',
+               about: human.about || '',
+               media: human.media || {link: '', type: ''},
+               professor: human.professor || ['Deutsch'],
+               id: human._id || null,
+               required: []
+            }
+            break;
+         case 'certificates':
+            state = {
+               name: human.name || '',
+               photo: human.photo || '',
+               owner: human.owner || '',
+               professor: human.professor || ['Deutsch'],
+               id: human._id || null,
+               required: ['name', 'owner']
+            }
+            break;
+         case 'books':
+            state = {
+               name: human.name || '',
+               photo: human.photo || '',
+               about: human.about || '',
+               professor: human.professor || ['Deutsch'],
+               id: human._id || null,
+               required: ['name', 'about', 'professor']
+            }
+            break;
+         case 'courses':
+            state = {
+               name: human.name || '',
+               about: human.about || '',
+               professor: human.professor || ['Deutsch'],
+               features: human.features || [],
+               themes: human.themes || [{title: 'grammar', content: ''}, {title: 'speaking', content: ''}],
+               id: human._id || null,
+               books: human.books || [],
+               features: human.features || [{text:'', photo: ''}],
+               required: ['name', 'about', 'professor']
+            }
+            break;
       }
       this.state = state
       this.form = React.createRef()
@@ -391,16 +399,20 @@ class Expanded extends Component {
    }
    render() {
       let {pageType} = this.props
-      if(pageType === 'humans'){
-         return <HumansBody state={this.state} props={this.props} funcs={this}/>
-      }else if(pageType === 'certificates'){
-         return <CertificatesBody state={this.state} props={this.props} funcs={this}/>
-      }else if(pageType === 'books'){
-         return <BooksBody state={this.state} props={this.props} funcs={this}/>
-      }else if(pageType === 'courses'){
-         return <CoursesBody state={this.state} props={this.props} funcs={this}/>
-      }else if(pageType === 'gallery'){
-         return <GalleryBody state={this.state} props={this.props} funcs={this}/>
+      let type = clearPageType(pageType)
+      switch(type){
+         case 'humans':
+            return <HumansBody state={this.state} props={this.props} funcs={this}/>
+         case 'certificates':
+            return <CertificatesBody state={this.state} props={this.props} funcs={this}/>
+         case 'books':
+            return <BooksBody state={this.state} props={this.props} funcs={this}/>
+         case 'courses':
+            return <CoursesBody state={this.state} props={this.props} funcs={this}/>
+         case 'gallery':
+            return <GalleryBody state={this.state} props={this.props} funcs={this}/>
+         default:
+            return <p>Something went wrong! Please refresh the page</p>
       }
    }
 }

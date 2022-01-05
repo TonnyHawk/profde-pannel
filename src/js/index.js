@@ -5,6 +5,7 @@ import Loader from './components/Loader';
 import serverUrl from './globals';
 import SortList from './components/SortList';
 import 'lazysizes';
+import {clearPageType} from './functions';
 
 import './style.css';
 
@@ -50,17 +51,9 @@ class App extends Component {
 
    async loadItems(){
       let items = [];
-      let collection = null;
-      switch(this.state.currentPage){
-         // case 'sort-humans':
-         //    collection = 'humans';
-         //    break;
-         default:
-            collection = this.state.currentPage;
-            break;
-      }
-      items = await getCollection(collection)
-      this.setState({items})
+      let pageName = clearPageType(this.state.currentPage)
+      items = await getCollection(pageName)
+      this.setState({items, currentPage: pageName})
    }
 
    async componentDidMount(){
@@ -106,8 +99,20 @@ class App extends Component {
    }
 
    changePage(name){
-      console.log('changing a page to '+name);
-      this.setState({currentPage: name}, ()=>this.loadItems())
+      let nameArr = name.split('-')
+      if(nameArr[0] === 'sort'){
+         let newName = ''
+         // toggler functionaliy
+         if(this.state.currentPage === name) newName = nameArr[1]
+         else newName = name
+         this.setState({currentPage: newName})
+      }else{
+         Promise.all(this.setState({currentPage: name}, async ()=>{
+            this.setUpLoader(true, 'Завантаження...');
+            await this.loadItems();
+            this.setUpLoader(false);
+         }))
+      }
       this.menuBtn.current.checked = false;
    }
 
@@ -160,13 +165,16 @@ class App extends Component {
             }
          }
 
+         let descr = ''
+         if(typeof human.owner !== 'undefined') descr = <p class="gall-item__descr">{human.owner}</p>
+
          return (
             <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>
                <div class="gall-item__photo">
                   {mediaThing}
                </div>
                <p class="gall-item__title">{human.name}</p>
-               {/* <p class="gall-item__descr">Анна Богуцька</p> */}
+               {descr}
             </div>
          )
       })
@@ -176,7 +184,7 @@ class App extends Component {
 
          let data = this.propertyFilter(this.state.items, 'professor', this.state.filter)
          content = <SortList items={data} filter={this.state.filter} pageType={currentPage} funcs={this}/>
-         
+
       }else{
          content = (
             <div class="gall__bd">
@@ -257,7 +265,12 @@ class App extends Component {
                         <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
                      </div>
                      <div className="btn btn-primary btn-lg" onClick={()=>this.addItem()}>+</div>
-                     <div className="btn btn-primary btn-lg" onClick={()=>this.changePage(`sort-${currentPage}`)}>Sort</div>
+                     <div className="btn btn-primary btn-lg" onClick={()=>{
+                           let pageName = '';
+                           if(currentPage.split('-')[0] === 'sort') pageName = currentPage
+                           else{pageName = `sort-${currentPage}`}
+                           this.changePage(pageName)
+                        }}>Sort</div>
                      <div class="input-group gall__search">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon1">@</span>

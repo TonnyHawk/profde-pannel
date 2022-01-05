@@ -40,3 +40,13 @@ export const toBase64 = file => new Promise((resolve, reject) => {
    reader.onload = () => resolve(reader.result);
    reader.onerror = error => reject(error);
 });
+
+export function clearPageType(pageType){
+   let pageTypeArr = pageType.split('-')
+   switch(pageTypeArr[0]){
+      case 'sort':
+         return pageTypeArr[1]
+      default:
+         return pageType
+   }
+}
