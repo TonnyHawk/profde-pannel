@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CertificatesBody(properties){
    let {state, props, funcs} = properties
-   let {name, photo, professor, about} = state
+   let {name, photo, professor, about, id} = state
    let index = 0;
    // creating professor element
    let professorElem = professor.map(elem=>{
@@ -86,13 +86,13 @@ export default function CertificatesBody(properties){
             </div>
             <div class="row justify-content-end">
                <div class="col-6 col-md-auto">
-                  <div class="btn btn-danger btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.delStudent()}>Видалити <i class="bi bi-trash"></i></div>
+                  <div class={`expanded-action btn btn-danger btn-lg btn-block px-5 py-3 my-5 ${id === null ? 'd-none' : ''}`} id="submit" onClick={()=>funcs.delStudent()}>Видалити <i class="bi bi-trash"></i></div>
                </div>
                <div className="col-6 col-md-auto">
-                  <div class="btn btn-primary btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.sendData()}>Зберегти <i class="bi bi-check-square"></i></div>
+                  <div class="expanded-action btn btn-primary btn-lg btn-block px-5 py-3 my-5" id="submit" onClick={()=>funcs.sendData()}>Зберегти <i class="bi bi-check-square"></i></div>
                </div>
                <div className="col d-none ">
-                  <div class="btn btn-success my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
+                  <div class="expanded-action btn btn-success my-5" id="get" onClick={()=>funcs.checkInfo('')}>Get Info</div>
                </div>
             </div>
          </div>
