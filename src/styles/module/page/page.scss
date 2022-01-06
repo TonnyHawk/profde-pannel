@@ -28,7 +28,11 @@
       position: relative;
       align-items: center;
       justify-content: center;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
+      margin-top: 50px;
+      @include media-breakpoint-up(md){
+         margin-top: 0;
+      }
    }
 
    // .page__title

@@ -2,6 +2,11 @@
 #nav{
    left: 0;
    position: absolute;
+   top: -60px;
+   z-index: 100;
+   @include media-breakpoint-up(md){
+     top: unset;
+   }
 }
 
 #menuToggle

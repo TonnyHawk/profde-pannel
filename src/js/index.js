@@ -7,7 +7,7 @@ import SortList from './components/SortList';
 import 'lazysizes';
 import {clearPageType} from './functions';
 
-import './style.css';
+import './dragabble.css';
 
 async function getCollection(add){
    let result = [];
@@ -264,20 +264,25 @@ class App extends Component {
 
                      <div className="row gall__hd">
                         <div className="col-12 col-md-6">
-                           <div class="gall__filters">
+                           {/* <div class="gall__filters">
                               <p class={`gall__filter ${this.state.filter === 'all' ? 'is-active' : ''} bg-active-main`} onClick={()=>this.toggleFilter('all')}>Всі</p>
                               <p class={`gall__filter ${this.state.filter === 'Deutsch' ? 'is-active' : ''} bg-active-deu`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</p>
                               <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
-                           </div>
+                           </div> */}
+<div class="btn-group btn-group-lg btn-group-toggle mb-3 mb-md-0" role="group" aria-label="Basic example">
+  <button type="button" class={`btn btn-primary ${this.state.filter === 'all' ? 'active' : ''}`} onClick={()=>this.toggleFilter('all')}>Всі</button>
+  <button type="button" class={`btn btn-primary ${this.state.filter === 'Deutsch' ? 'active' : ''}`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</button>
+  <button type="button" class={`btn btn-primary ${this.state.filter === 'English' ? 'active' : ''}`} onClick={()=>this.toggleFilter('English')}>English</button>
+</div>
                         </div>
                         <div className="col-12 col-md-6">
-                           <div className="row gall__search justify-content-end">
+                           <div className="row gall__search justify-content-start justify-content-md-end">
                               <div className="col-12 mb-3">
                                  <div class="input-group">
                                     <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon1">@</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value={search} onChange={(e)=>this.handleChange(e)}/>
+                                    <input type="text" class="form-control" placeholder="Поле для пошуку" aria-label="Username" aria-describedby="basic-addon1" value={search} onChange={(e)=>this.handleChange(e)}/>
                                  </div>
                               </div>
                               <div className="col-auto">
@@ -289,7 +294,7 @@ class App extends Component {
                                     if(currentPage.split('-')[0] === 'sort') pageName = currentPage
                                     else{pageName = `sort-${currentPage}`}
                                     this.changePage(pageName)
-                                 }}>Сортувати <i class={`bi ${currentPage.split('-')[0] === 'sort' ? 'bi-funnel-fill' : 'bi-funnel'}`}></i></div>
+                                 }}>Впорядкувати <i class={`bi ${currentPage.split('-')[0] === 'sort' ? 'bi-funnel-fill' : 'bi-funnel'}`}></i></div>
                               </div>
                            </div>
                         </div>
