@@ -1,8 +1,9 @@
 import React from 'react';
+import Accordion from 'react-bootstrap/Accordion'
 
 export default function GalleryBody(properties){
    let {state, props, funcs} = properties
-         let {name, media, about, professor, id} = state
+         let {name, media, about, professor, id, showcase} = state
 
          // creating professor element
          let professorElem = professor.map((elem, index)=>{
@@ -94,6 +95,24 @@ export default function GalleryBody(properties){
                               <label class="form-label mb-2">Professor</label>
                               {professorElem}
                               <div class="btn btn-success" onClick={()=>funcs.addField('professor', 2)}>Додати Школу</div>
+                           </div>
+                           <div className="mb-5">
+                              <label class="form-label mb-2">Місце на основній сторінці</label><br/>
+                              <img src="img/gallery-showcase-example.svg" className='mb-2' style={{maxWidth: '30rem', width: '100%'}} alt="" />
+                              <select class="form-select" aria-label="select example" id="professor" 
+                                 name='showcase'
+                                 value={showcase}
+                                 onChange={(e)=>funcs.handleChange(e)}>
+                                    <option value={'unset'}>Не визначено</option>
+                                    <option value={0}>0</option>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                 </select>
                            </div>
                         </form>
                      </div>

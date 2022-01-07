@@ -34,7 +34,7 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses, gallery
-         currentPage: 'certificates',
+         currentPage: 'gallery',
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()
@@ -269,11 +269,11 @@ class App extends Component {
                               <p class={`gall__filter ${this.state.filter === 'Deutsch' ? 'is-active' : ''} bg-active-deu`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</p>
                               <p class={`gall__filter ${this.state.filter === 'English' ? 'is-active' : ''} bg-active-eng`} onClick={()=>this.toggleFilter('English')}>English</p>
                            </div> */}
-<div class="btn-group btn-group-lg btn-group-toggle mb-3 mb-md-0" role="group" aria-label="Basic example">
-  <button type="button" class={`btn btn-primary ${this.state.filter === 'all' ? 'active' : ''}`} onClick={()=>this.toggleFilter('all')}>Всі</button>
-  <button type="button" class={`btn btn-primary ${this.state.filter === 'Deutsch' ? 'active' : ''}`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</button>
-  <button type="button" class={`btn btn-primary ${this.state.filter === 'English' ? 'active' : ''}`} onClick={()=>this.toggleFilter('English')}>English</button>
-</div>
+                           <div class="btn-group btn-group-lg btn-group-toggle mb-3 mb-md-0" role="group" aria-label="Basic example">
+                              <button type="button" class={`btn btn-primary ${this.state.filter === 'all' ? 'active' : ''}`} onClick={()=>this.toggleFilter('all')}>Всі</button>
+                              <button type="button" class={`btn btn-primary ${this.state.filter === 'Deutsch' ? 'active' : ''}`} onClick={()=>this.toggleFilter('Deutsch')}>Deutsch</button>
+                              <button type="button" class={`btn btn-primary ${this.state.filter === 'English' ? 'active' : ''}`} onClick={()=>this.toggleFilter('English')}>English</button>
+                           </div>
                         </div>
                         <div className="col-12 col-md-6">
                            <div className="row gall__search justify-content-start justify-content-md-end">

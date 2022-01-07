@@ -67,6 +67,7 @@ class Expanded extends Component {
                media: human.media || {link: '', type: ''},
                professor: human.professor || ['Deutsch'],
                id: human._id || null,
+               showcase: human.showcase || 'unset',
                required: []
             }
             break;
