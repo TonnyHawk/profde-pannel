@@ -67,7 +67,7 @@ class Expanded extends Component {
                media: human.media || {link: '', type: ''},
                professor: human.professor || ['Deutsch'],
                id: human._id || null,
-               showcase: human.showcase || 'unset',
+               showcase: human.showcase || 'null',
                required: []
             }
             break;
@@ -317,7 +317,8 @@ class Expanded extends Component {
                professor: this.state.professor,
                about: this.state.about,
                id: this.state.id,
-               media: this.state.media
+               media: this.state.media,
+               showcase: this.state.showcase
             }
          } else if(pageType === 'courses'){
 

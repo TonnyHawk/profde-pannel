@@ -103,7 +103,7 @@ export default function GalleryBody(properties){
                                  name='showcase'
                                  value={showcase}
                                  onChange={(e)=>funcs.handleChange(e)}>
-                                    <option value={'unset'}>Не визначено</option>
+                                    <option value={'null'}>Не визначено</option>
                                     <option value={0}>0</option>
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
