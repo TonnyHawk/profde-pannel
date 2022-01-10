@@ -15,7 +15,7 @@ async function getCollection(add){
    if (response.ok) { // если HTTP-статус в диапазоне 200-299
       result = await response.json();
    } else {
-      alert("Ошибка подгрузки "+add+" (HTTP): " + response.status);
+      alert("Ошибка подгрузки данних "+add+" (HTTP): " + response.status + "Спробуйте перезагрузити сторінку. Якщо не допоможе - помилка на сервері");
    }
    return result
 }
@@ -51,9 +51,10 @@ class App extends Component {
 
    async loadItems(){
       let items = [];
+      this.setUpLoader(true, 'Завантаження данних')
       let pageName = clearPageType(this.state.currentPage)
       items = await getCollection(pageName)
-      this.setState({items, currentPage: pageName})
+      this.setState({items, currentPage: pageName}, ()=>this.setUpLoader(false))
    }
 
    async componentDidMount(){

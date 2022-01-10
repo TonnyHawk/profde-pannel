@@ -68,7 +68,7 @@ class Expanded extends Component {
                professor: human.professor || ['Deutsch'],
                id: human._id || null,
                showcase: human.showcase || 'null',
-               required: []
+               required: ['media']
             }
             break;
          case 'certificates':
@@ -213,7 +213,14 @@ class Expanded extends Component {
          targets: []
       };
          this.state.required.forEach(elem=>{
-            if(this.state[elem] === ''){
+            if(elem === 'media'){
+               let formInfo = new FormData(this.form.current)
+               let file = formInfo.get('media')
+               if(file.size == 0){
+                  response.access = false
+                  response.targets.push(elem)
+               }
+            }else if(this.state[elem] === ''){
                response.access = false
                response.targets.push(elem)
             }
