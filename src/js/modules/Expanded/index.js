@@ -217,8 +217,10 @@ class Expanded extends Component {
                let formInfo = new FormData(this.form.current)
                let file = formInfo.get('media')
                if(file.size == 0){
-                  response.access = false
-                  response.targets.push(elem)
+                  if(this.state.media.link === ''){
+                     response.access = false
+                     response.targets.push(elem)
+                  }
                }
             }else if(this.state[elem] === ''){
                response.access = false

@@ -75,8 +75,8 @@ export default function GalleryBody(properties){
                      <div class="col">
                         <form action="" id='form' class="needs-validation" ref={funcs.form} noValidate>
                            <div class="mb-4">
-                              <label htmlFor="name" class="form-label">Ім'я</label>
-                              <input type="text" class="form-control" id="name" name='name' placeholder="" required value={name} onChange={(e)=>funcs.handleChange(e)}/>
+                              <label htmlFor="name" class="form-label">Заголовок</label>
+                              <input type="text" class="form-control" id="name" name='name' placeholder="" value={name} onChange={(e)=>funcs.handleChange(e)}/>
                            </div>
                            <div class="row">
                               <div class="col-12 col-md-6">
@@ -89,7 +89,7 @@ export default function GalleryBody(properties){
                            </div>
                            <div class="mb-4">
                               <label htmlFor="about" class="form-label">Опис</label>
-                              <textarea rows='10' class="form-control" id="about" name='about' value={about} onChange={(e)=>funcs.handleChange(e)} required></textarea>
+                              <textarea rows='10' class="form-control" id="about" name='about' value={about} onChange={(e)=>funcs.handleChange(e)}></textarea>
                            </div>
                            <div class="mb-5">
                               <label class="form-label mb-2">Professor</label>
@@ -99,20 +99,40 @@ export default function GalleryBody(properties){
                            <div className="mb-5">
                               <label class="form-label mb-2">Місце на основній сторінці</label><br/>
                               <img src="img/gallery-showcase-example.svg" className='mb-2' style={{maxWidth: '30rem', width: '100%'}} alt="" />
-                              <select class="form-select" aria-label="select example" id="professor" 
-                                 name='showcase'
-                                 value={showcase}
-                                 onChange={(e)=>funcs.handleChange(e)}>
-                                    <option value={'null'}>Не визначено</option>
-                                    <option value={'0'}>0</option>
-                                    <option value={'1'}>1</option>
-                                    <option value={'2'}>2</option>
-                                    <option value={'3'}>3</option>
-                                    <option value={'4'}>4</option>
-                                    <option value={'5'}>5</option>
-                                    <option value={'6'}>6</option>
-                                    <option value={'7'}>7</option>
-                                 </select>
+                              <div className="row">
+                                 <div className="col">
+                                    <select class="form-select" aria-label="select example" id="professor" 
+                                    name='showcase'
+                                    value={showcase}
+                                    onChange={(e)=>funcs.handleChange(e)}>
+                                       <option value={'null'}>Не визначено</option>
+                                       <option value={'0'}>0</option>
+                                       <option value={'1'}>1</option>
+                                       <option value={'2'}>2</option>
+                                       <option value={'3'}>3</option>
+                                       <option value={'4'}>4</option>
+                                       <option value={'5'}>5</option>
+                                       <option value={'6'}>6</option>
+                                       <option value={'7'}>7</option>
+                                    </select>
+                                 </div>
+                                 <div className="col">
+                                    <select class="form-select" aria-label="select example" id="professor" 
+                                       name='showcase'
+                                       value={showcase}
+                                       onChange={(e)=>funcs.handleChange(e)}>
+                                          <option value={'null'}>Не визначено</option>
+                                          <option value={'0'}>0</option>
+                                          <option value={'1'}>1</option>
+                                          <option value={'2'}>2</option>
+                                          <option value={'3'}>3</option>
+                                          <option value={'4'}>4</option>
+                                          <option value={'5'}>5</option>
+                                          <option value={'6'}>6</option>
+                                          <option value={'7'}>7</option>
+                                       </select>
+                                 </div>
+                              </div>
                            </div>
                         </form>
                      </div>
