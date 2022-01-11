@@ -61,13 +61,21 @@ class Expanded extends Component {
             }
             break;
          case 'gallery':
+            // to rewrite old data
+            let showcase = [{place: 'null', prof: 'Deutsch'}];
+            if(typeof human.showcase === 'object'){
+               if(typeof human.showcase.length !== 'undefined'){
+                  showcase = human.showcase
+               }
+            }
+            //---
             state = {
                name: human.name || '',
                about: human.about || '',
                media: human.media || {link: '', type: ''},
                professor: human.professor || ['Deutsch'],
                id: human._id || null,
-               showcase: human.showcase || 'null',
+               showcase,
                required: ['media']
             }
             break;
@@ -110,28 +118,25 @@ class Expanded extends Component {
    }
    
    handleChange(e){
-      let key = e.target.name
+      let name = e.target.name
       let value = e.target.value
       if(e.target.getAttribute('data-index')){ // meens that we deal with an array
          let index = e.target.getAttribute('data-index')
-         let name = e.target.name
          if(e.target.getAttribute('data-name')){ // if we need to change select pair
-               key = e.target.getAttribute('data-name')
-               this.setState(state=>{
-                  state[key][index][name] = value
-                  return state
-               }, ()=>{
-                  // console.log(this.state[key]);
-               })
+            let key = e.target.getAttribute('data-name')
+            this.setState(state=>{
+               state[key][index][name] = value
+               return state
+            })
          } else{ // we have a simple select
             this.setState(state=>{
                state[name][index] = value;
                return state
             })
          }
-      } else{
+      }else{
          this.setState({
-            [key]: value
+            [name]: value
          })
       }
    }
@@ -166,6 +171,9 @@ class Expanded extends Component {
             break;
          case 'features':
             template = {text: '', photo: ''};
+            break;
+         case 'showcase':
+            template = {place: 'null', prof: 'Deustch'};
             break;
          default:
             errors = 'function addField is not correct fulfield'

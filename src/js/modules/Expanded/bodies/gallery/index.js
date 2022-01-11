@@ -44,6 +44,42 @@ export default function GalleryBody(properties){
                break;
          }
 
+         let showcaseElem = showcase.map((elem, index)=>{
+            return (
+            <div className="row mb-3">
+               <div className="col">
+                  <select class="form-select" aria-label="select example" id="professor" 
+                  name='place'
+                  data-name='showcase'
+                  data-index={index}
+                  value={elem.place}
+                  onChange={(e)=>funcs.handleChange(e)}>
+                     <option value={'null'}>Не визначено</option>
+                     <option value={'0'}>0</option>
+                     <option value={'1'}>1</option>
+                     <option value={'2'}>2</option>
+                     <option value={'3'}>3</option>
+                     <option value={'4'}>4</option>
+                     <option value={'5'}>5</option>
+                     <option value={'6'}>6</option>
+                     <option value={'7'}>7</option>
+                  </select>
+               </div>
+               <div className="col">
+                  <select class="form-select" aria-label="select example" id="professor" 
+                  name='prof'
+                  data-name='showcase'
+                  data-index={index}
+                  value={elem.prof}
+                  onChange={(e)=>funcs.handleChange(e)}>
+                     <option value='Deutsch'>Deutsch</option>
+                     <option value="English">English</option>
+                  </select>
+               </div>
+            </div>
+            )
+         })
+
 
          let style = {
             zIndex: 100, 
@@ -99,40 +135,8 @@ export default function GalleryBody(properties){
                            <div className="mb-5">
                               <label class="form-label mb-2">Місце на основній сторінці</label><br/>
                               <img src="img/gallery-showcase-example.svg" className='mb-2' style={{maxWidth: '30rem', width: '100%'}} alt="" />
-                              <div className="row">
-                                 <div className="col">
-                                    <select class="form-select" aria-label="select example" id="professor" 
-                                    name='showcase'
-                                    value={showcase}
-                                    onChange={(e)=>funcs.handleChange(e)}>
-                                       <option value={'null'}>Не визначено</option>
-                                       <option value={'0'}>0</option>
-                                       <option value={'1'}>1</option>
-                                       <option value={'2'}>2</option>
-                                       <option value={'3'}>3</option>
-                                       <option value={'4'}>4</option>
-                                       <option value={'5'}>5</option>
-                                       <option value={'6'}>6</option>
-                                       <option value={'7'}>7</option>
-                                    </select>
-                                 </div>
-                                 <div className="col">
-                                    <select class="form-select" aria-label="select example" id="professor" 
-                                       name='showcase'
-                                       value={showcase}
-                                       onChange={(e)=>funcs.handleChange(e)}>
-                                          <option value={'null'}>Не визначено</option>
-                                          <option value={'0'}>0</option>
-                                          <option value={'1'}>1</option>
-                                          <option value={'2'}>2</option>
-                                          <option value={'3'}>3</option>
-                                          <option value={'4'}>4</option>
-                                          <option value={'5'}>5</option>
-                                          <option value={'6'}>6</option>
-                                          <option value={'7'}>7</option>
-                                       </select>
-                                 </div>
-                              </div>
+                              {showcaseElem}
+                              <div class="btn btn-success" onClick={()=>funcs.addField('showcase', 2)}>Додати місце для іншої школи</div>
                            </div>
                         </form>
                      </div>
