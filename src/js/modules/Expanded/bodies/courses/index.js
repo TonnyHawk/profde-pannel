@@ -40,7 +40,7 @@ export default function CoursesBody(properties){
          <div className="col">
             <div className="row">
                <div className="col-12 col-md-6 mb-3 mb-md-0">
-                  <label class="form-sublabel">Значок (картинка)</label>
+                  <label class="form-sublabel">Значок (картинка) <strong className='seccond-text'>(.png, .jpg, .jpeg, .svg)</strong></label>
                   <input type="file" class="form-control" name={`feature-${index}`} required onChange={(e)=>funcs.handleChange(e)} accept="image/png, image/jpeg, image/svg"/>
                </div>
                <div className="col-12 col-md-6">

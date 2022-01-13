@@ -66,7 +66,7 @@ export default function CertificatesBody(properties){
                      <div class="row">
                         <div class="col-12 col-md-6">
                            <div class="mb-4">
-                              <label htmlFor="photo" class="form-label">Фото</label><br/>
+                              <label htmlFor="photo" class="form-label">Фото <strong className='seccond-text'>(.png, .jpg, .jpeg)</strong></label><br/>
                               {photoPicture}
                               <input class="form-control" type="file" id="photo" name='photo' accept="image/png, image/jpeg"/>
                            </div>

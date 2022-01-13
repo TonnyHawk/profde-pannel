@@ -211,14 +211,14 @@ export default function HumansBody(properties){
                            <div class="row mb-5">
                               <div class="col-12 col-md-6">
                                  <div class="mb-4">
-                                    <label htmlFor="photo" class="form-label">Фото</label><br/>
+                                    <label htmlFor="photo" class="form-label">Фото <strong className='seccond-text'>(.png, .jpg, .jpeg)</strong></label><br/>
                                     {photoPicture}
                                     <input class="form-control" type="file" id="photo" name='photo' accept="image/png, image/jpeg"/>
                                  </div>
                               </div>
                               <div class="col-12 col-md-6">
                                  <div class="mb-4 video-elem">
-                                    <label class="form-label">Відео</label><br/>
+                                    <label class="form-label">Відео <strong className='seccond-text'>(.mp4)</strong></label><br/>
                                     {videoElem}
                                     <div class="btn btn-success" onClick={()=>funcs.addField('video', 2)}>Додати Відео</div>
                                  </div>
