@@ -5,7 +5,7 @@ import Loader from './components/Loader';
 import serverUrl from './globals';
 import SortList from './components/SortList';
 import 'lazysizes';
-import {clearPageType} from './functions';
+import {clearPageType, textElipsizer} from './functions';
 
 import './dragabble.css';
 
@@ -168,6 +168,9 @@ class App extends Component {
 
          let descr = ''
          if(typeof human.owner !== 'undefined') descr = <p class="gall-item__descr">{human.owner}</p>
+         if(currentPage === 'gallery') {
+            if(human.about !== '') descr = <p class="gall-item__descr">{textElipsizer(human.about, 80)}</p>
+         }
 
          return (
             <div class="gall__item gall-item" onClick={()=>this.selectHuman(human)}>

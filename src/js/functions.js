@@ -50,3 +50,10 @@ export function clearPageType(pageType){
          return pageType
    }
 }
+
+export function textElipsizer(str, maxLength=null){
+   if(maxLength === null) maxLength = str.length
+   let dots = '';
+   if(str.length > maxLength) dots = '...';
+   return str.slice(0, maxLength-1) + dots;
+}
