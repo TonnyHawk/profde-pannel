@@ -362,6 +362,7 @@ class Expanded extends Component {
             console.log(human.features);
          }
 
+         reqData.set('itemType', this.props.pageType)
          reqData.set('info', '')
 
          if(pageType === 'humans'){
@@ -408,7 +409,6 @@ class Expanded extends Component {
 
          console.log(human.features);
 
-         reqData.set('itemType', this.props.pageType)
          reqData.set('info', JSON.stringify(human))
 
          // forming request string
