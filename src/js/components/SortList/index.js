@@ -133,10 +133,37 @@ class SortList extends Component {
       listItems = listItems.map((human, index)=>{
          let descr = ''
          if(typeof human.owner !== 'undefined') descr = `(${human.owner})`
+         if(typeof human.role !== 'undefined'){
+            switch(human.role){
+               case 'student':
+                  descr = '(Учень)'
+                  break;
+               case 'teacher':
+                  descr = '(Вчитель)'
+                  break;
+            }
+         }
+         let media = '';
+         if(typeof human.media !== 'undefined'){
+            switch(human.media.type){
+               case 'image':
+                  media = <img src={human.media.link} width={150}/>
+                  break;
+               case 'video':
+                  media = (
+                     <video preload="metadata" width={150}>
+                        <source src={human.media.link} type="video/mp4"/>
+                        Your browser does not support the video tag.
+                     </video>
+                  )
+                  break;
+            }
+         }
          return (
             <li data-index={index}>
             <span class="number">{index + 1}</span>
             <div class="draggable" draggable="true">
+               {media}
                <p class="person-name" data-id={human._id}>{human.name} <br/>{descr}</p>
                <i class="fas fa-grip-lines"></i>
             </div>
