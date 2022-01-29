@@ -34,7 +34,7 @@ class App extends Component {
          // all, Deutsch, English
          filter: 'all',
          // available pages: humans, certificates, books, courses, gallery
-         currentPage: 'gallery',
+         currentPage: 'humans',
          loader: {display: false, message: ''}
       }
       this.rootElem = React.createRef()
@@ -170,6 +170,18 @@ class App extends Component {
          if(typeof human.owner !== 'undefined') descr = <p class="gall-item__descr">{human.owner}</p>
          if(currentPage === 'gallery') {
             if(human.about !== '') descr = <p class="gall-item__descr">{textElipsizer(human.about, 80)}</p>
+         }
+         if(typeof human.role !== 'undefined') {
+            let role = '';
+            switch(human.role){
+               case 'teacher':
+                  role = 'Вчитель';
+                  break;
+               case 'student':
+                  role = 'Учень';
+                  break;
+            }
+            descr = <p class="gall-item__descr">({role})</p>
          }
 
          return (
