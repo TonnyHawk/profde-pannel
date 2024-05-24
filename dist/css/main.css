@@ -12,19 +12,87 @@ a {
   text-decoration: none;
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -39,8 +107,17 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -48,17 +125,21 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
   content: none;
 }
 
@@ -67,15 +148,15 @@ table {
   border-spacing: 0;
 }
 
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration,
-input[type=search]::-webkit-search-results-button,
-input[type=search]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
@@ -96,8 +177,8 @@ audio,
 canvas,
 video {
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
+  display: inline;
+  zoom: 1;
   max-width: 100%;
 }
 
@@ -247,9 +328,9 @@ select {
  *    Known issue: inner spacing remains in IE 6.
  */
 button,
-html input[type=button],
-input[type=reset],
-input[type=submit] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -272,8 +353,8 @@ html input[disabled] {
  * 3. Remove excess padding in IE 7.
  *    Known issue: excess padding remains in IE 6.
  */
-input[type=checkbox],
-input[type=radio] {
+input[type='checkbox'],
+input[type='radio'] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -289,7 +370,7 @@ input[type=radio] {
  * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  */
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: textfield;
   /* 1 */
   -moz-box-sizing: content-box;
@@ -302,8 +383,8 @@ input[type=search] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -383,62 +464,70 @@ textarea {
 .clearfix::after {
   display: block;
   clear: both;
-  content: "";
+  content: '';
 }
 
 .link-primary {
   color: #0d6efd;
 }
-.link-primary:hover, .link-primary:focus {
+.link-primary:hover,
+.link-primary:focus {
   color: #0a58ca;
 }
 
 .link-secondary {
   color: #6c757d;
 }
-.link-secondary:hover, .link-secondary:focus {
+.link-secondary:hover,
+.link-secondary:focus {
   color: #565e64;
 }
 
 .link-success {
   color: #198754;
 }
-.link-success:hover, .link-success:focus {
+.link-success:hover,
+.link-success:focus {
   color: #146c43;
 }
 
 .link-info {
   color: #0dcaf0;
 }
-.link-info:hover, .link-info:focus {
+.link-info:hover,
+.link-info:focus {
   color: #3dd5f3;
 }
 
 .link-warning {
-  color: #F09815;
+  color: #f09815;
 }
-.link-warning:hover, .link-warning:focus {
+.link-warning:hover,
+.link-warning:focus {
   color: #f3ad44;
 }
 
 .link-danger {
   color: #dc3545;
 }
-.link-danger:hover, .link-danger:focus {
+.link-danger:hover,
+.link-danger:focus {
   color: #b02a37;
 }
 
 .link-light {
   color: #f8f9fa;
 }
-.link-light:hover, .link-light:focus {
+.link-light:hover,
+.link-light:focus {
   color: #f9fafb;
 }
 
 .link-dark {
   color: #212529;
 }
-.link-dark:hover, .link-dark:focus {
+.link-dark:hover,
+.link-dark:focus {
   color: #1a1e21;
 }
 
@@ -449,7 +538,7 @@ textarea {
 .ratio::before {
   display: block;
   padding-top: var(--bs-aspect-ratio);
-  content: "";
+  content: '';
 }
 .ratio > * {
   position: absolute;
@@ -566,7 +655,7 @@ textarea {
   bottom: 0;
   left: 0;
   z-index: 1;
-  content: "";
+  content: '';
 }
 
 .text-truncate {
@@ -849,7 +938,7 @@ textarea {
 }
 
 .border-warning {
-  border-color: #F09815 !important;
+  border-color: #f09815 !important;
 }
 
 .border-danger {
@@ -1754,17 +1843,26 @@ textarea {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-primary-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-secondary-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 
 .bg-success {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-success-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 
 .bg-info {
@@ -1774,7 +1872,10 @@ textarea {
 
 .bg-warning {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-warning-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-warning-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 
 .bg-danger {
@@ -1804,7 +1905,10 @@ textarea {
 
 .bg-body {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-body-bg-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 
 .bg-transparent {
@@ -5251,7 +5355,7 @@ textarea {
   }
 }
 .gall__bd:after {
-  content: "";
+  content: '';
   flex-grow: 10;
 }
 .gall__filters {
@@ -5292,13 +5396,13 @@ textarea {
   color: white;
 }
 .gall__filter.is-active.bg-active-main {
-  background: #7D55D1;
+  background: #7d55d1;
 }
 .gall__filter.is-active.bg-active-eng {
-  background: #4865FF;
+  background: #4865ff;
 }
 .gall__filter.is-active.bg-active-deu {
-  background: #F09815;
+  background: #f09815;
 }
 .gall--books .gall__bd {
   margin-left: calc(-32px * 0.5);
@@ -5326,7 +5430,7 @@ textarea {
 }
 .gall--books .gall-item {
   padding: 15px;
-  background-color: #E1E1E1;
+  background-color: #e1e1e1;
   border-radius: 10px;
   width: 100%;
   cursor: pointer;
@@ -5349,7 +5453,8 @@ textarea {
 .gall--books .gall-item__img {
   width: 100%;
 }
-.gall--books .gall-item__title, .gall--books .gall-item__descr {
+.gall--books .gall-item__title,
+.gall--books .gall-item__descr {
   transition: 0.3s;
 }
 .gall--books .gall-item__title {
@@ -5382,9 +5487,10 @@ textarea {
   }
 }
 .gall--books .gall-item:hover {
-  background: #4865FF;
+  background: #4865ff;
 }
-.gall--books .gall-item:hover .gall-item__descr, .gall--books .gall-item:hover .gall-item__title {
+.gall--books .gall-item:hover .gall-item__descr,
+.gall--books .gall-item:hover .gall-item__title {
   color: white;
 }
 .gall--photos .gall__bd {
@@ -5450,7 +5556,7 @@ textarea {
   height: 100%;
   position: fixed;
   z-index: 2000;
-  background: #F5F4F7;
+  background: #f5f4f7;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 55px 20px 80px;
@@ -5582,7 +5688,8 @@ textarea {
   border-radius: 3px;
   z-index: 1;
   transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
 }
 
 #menuToggle span:first-child {
