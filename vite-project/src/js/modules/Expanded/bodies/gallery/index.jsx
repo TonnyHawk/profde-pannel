@@ -1,5 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import serverUrl from '../../../../globals';
 
 export default function GalleryBody(properties) {
   let { state, props, funcs } = properties;
@@ -42,13 +43,18 @@ export default function GalleryBody(properties) {
   switch (media.type) {
     case 'image':
       mediaElement = (
-        <img src={media.link} className="mb-3" width={'100%'} alt="" />
+        <img
+          src={serverUrl + media.link}
+          className="mb-3"
+          width={'100%'}
+          alt=""
+        />
       );
       break;
     case 'video':
       mediaElement = (
         <video width={'100%'} className="mb-3" controls preload="metadata">
-          <source src={media.link} type="video/mp4" />
+          <source src={serverUrl + media.link} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       );
