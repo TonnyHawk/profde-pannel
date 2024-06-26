@@ -176,14 +176,7 @@ class App extends Component {
           );
         } else if (human.media.type === 'image') {
           const link = serverUrl + human.media.link;
-          mediaThing = (
-            <img
-              src={link + '/min'}
-              alt=""
-              class="gall-item__img lazyload"
-              data-src={human.media.link}
-            />
-          );
+          mediaThing = <img src={link} alt="" class="gall-item__img" />;
         }
       }
 
