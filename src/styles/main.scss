@@ -2,8 +2,8 @@
 @import 'basic/reset';
 @import 'basic/colors';
 
-@import '../fonts/roboto/stylesheet.css';
-@import '../fonts/gilroy/stylesheet.css';
+@import '/fonts/roboto/stylesheet.css';
+@import '/fonts/gilroy/stylesheet.css';
 
 @import '../../node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
@@ -11,21 +11,21 @@
 @import 'module/page/page';
 @import 'module/nav/nav';
 
-.form-label{
-   font-size: 16px;
+.form-label {
+  font-size: 16px;
 }
 
-.form-sublabel{
-   font-size: 13px;
-   margin-bottom: 5px;
+.form-sublabel {
+  font-size: 13px;
+  margin-bottom: 5px;
 }
 
-.info-text{
-   font-size: 19px;
-   font-family: Roboto;
+.info-text {
+  font-size: 19px;
+  font-family: Roboto;
 }
 
-.seccond-text{
-   color: #a2a2a2;
-   font-weight: 400;
+.seccond-text {
+  color: #a2a2a2;
+  font-weight: 400;
 }
